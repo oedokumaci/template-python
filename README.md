@@ -1,8 +1,6 @@
 <div align="center">
 
-This is a template Python repository to start a fresh project with my default setup.
-
-&nbsp;
+This is a template Python repository to start a fresh project with a default setup.
 
 ![Tests](https://github.com/oedokumaci/template/actions/workflows/tests.yml/badge.svg)
 ![Quality](https://github.com/oedokumaci/template/actions/workflows/quality.yml/badge.svg)
@@ -13,78 +11,32 @@ This is a template Python repository to start a fresh project with my default se
 
 </div>
 
-# User Guide
+The set up includes:
 
-## Requirements
+- [PDM](https://pdm.fming.dev/latest/) for dependency management
+- [GitHub Actions](https://github.com/features/actions) and [pre-commit](https://pre-commit.com/) for linting, formatting, CI/CD
+  - [Black](https://black.readthedocs.io/en/stable/#) for code formatting
+  - [Mypy](https://mypy.readthedocs.io/en/stable/) for static type checking
+  - [Pytest](https://docs.pytest.org/) for testing
+- [MIT](https://en.wikipedia.org/wiki/MIT_License) license
 
-- Python >= 3.10
-- OS: Ubuntu, MacOS, Windows
 
-## Installation
+# Getting Started
 
-Pip installing the package from PyPI is not yet available. Instead, download [from this link](https://github.com/oedokumaci/template/archive/refs/heads/main.zip) and unzip. You will also need to change the folder name from template-main to template (or cd into template-main in step 2 below). Alternatively, if you have git installed, simply run 
+1. Click on the `Use this template` button to create a new repository from this template.
+2. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use hyphens instead of spaces or underscores.
+3. Clone the repository to your local machine.
+4. Cd into the repository directory.
+5. Run template_setup.py with
 ```bash
-git clone https://github.com/oedokumaci/template
-```
-to install the package locally. After downloading, here are the steps to install the dependencies in a virtual environment using [PDM]:
-
-1. `pip install pdm`
-2. `cd template`
-3. `pdm lock -v`
-4. `pdm install`
-
-## Usage
-
-### Configuration
-
-First edit the `./config/config.yaml` to your liking. Example config files can be found at `./config/`.
-
-### Quick Start
-
-After configuring the `./config/config.yaml`, simply run the following command in the project directory.
-```bash
-pdm run python -m template
+python template_setup.py
 ```
 
-### Detailed Usage
-For a list of all the CLI arguments and options, run
-```bash
-pdm run python -m template --help
-```
-
-&nbsp;
-
-# Developer Guide
-
-## Setup
-
-This project is [PDM]-managed, which is compatible with [PEP 582] and [PEP 621]. If you are a developer, first `pip install pdm` and then make your Python interpreter aware of [PEP 582]. If you are using bash, you can do this by running
-
-```bash
-pdm --pep582 >> ~/.bash_profile
-```
-
-Similarly, for zsh run
-
-```bash
-pdm --pep582 >> ~/.zshrc
-```
-Then `git clone` the project and `mkdir __pypackages__` in the project directory. This lets [PDM] know that you are using [PEP 582] instead of virtualenv. Now you can `pdm install`, which will install all the dependencies in the project directory.
-
-## Development
-
-### IDE Support
-
-In order to configure your IDE to support [PEP 582], you can follow the instructions [here](https://pdm.fming.dev/latest/usage/pep582/).
-
-### Pre-commit Hooks
-
-The project also uses pre-commit hooks. Because the project uses [PDM], you **do not** need to `pip install pre-commit`. Instead, run directly
-```bash
-pdm run pre-commit install
-```
-in the project directory to install hooks to your local `.git`.
-
-[pep 582]: https://www.python.org/dev/peps/pep-0582
-[pep 621]: https://www.python.org/dev/peps/pep-0621
-[PDM]: https://pdm.fming.dev
+### Running the setup script will:
+ - Rename file contents, names, and directories that contains template repository name with the new repository name
+ - Rename user name in `pyproject.toml` and `README_main.md`
+ - Rename user email in `pyproject.toml`
+ - Remove README.md and rename `README_main.md` to `README.md`
+ - Add `template_setup.py` to `.gitignore`
+ - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
+ - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
