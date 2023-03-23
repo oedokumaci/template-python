@@ -28,14 +28,14 @@ def rename_files(
         path.rename(new_path)
     for path in dir_paths:
         new_path = path.with_name(
-            path.name.replace(old_word, new_word.replace("_", "-"))
+            path.name.replace(old_word, new_word)
         )
         path.rename(new_path)
 
 
 if __name__ == "__main__":
     # Rename file contents, names, and directories
-    rename_files("template", CURRENT_PROJECT_PATH.name, FILE_PATHS, DIR_PATHS)
+    rename_files("template", CURRENT_PROJECT_PATH.name.replace("-", "_"), FILE_PATHS, DIR_PATHS)
     while True:
         new_user_name = input("Enter Github username: ")
         new_user_email = input("Enter Github email: ")
