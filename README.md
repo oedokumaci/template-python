@@ -52,8 +52,6 @@ For a list of all the CLI arguments and options, run
 pdm run python -m template --help
 ```
 
-A sample output with currently implemented CLI arguments and options is shown below.
-
 &nbsp;
 
 # Developer Guide
@@ -71,9 +69,7 @@ Similarly, for zsh run
 ```bash
 pdm --pep582 >> ~/.zshrc
 ```
-Then `git clone` the project and `mkdir __pypackages__` in the project directory. This lets [PDM] know that you are using [PEP 582] instead of virtualenv. Now you can `pdm install`, which will install all the dependencies in the project directory. A sample output is shown below.
-
-<img src=./style/PDM-Install.png width="600">
+Then `git clone` the project and `mkdir __pypackages__` in the project directory. This lets [PDM] know that you are using [PEP 582] instead of virtualenv. Now you can `pdm install`, which will install all the dependencies in the project directory.
 
 ## Development
 
