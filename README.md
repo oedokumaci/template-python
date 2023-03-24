@@ -11,8 +11,10 @@ This is a template Python repository to start a fresh project with a default set
 
 </div>
 
-The set up includes:
+The project setup includes:
 
+- Python >= 3.10
+- Ubuntu, MacOS, Windows latest OS versions
 - [PDM](https://pdm.fming.dev/latest/) for dependency management
 - [GitHub Actions](https://github.com/features/actions) and [pre-commit](https://pre-commit.com/) for linting, formatting, CI/CD
   - [Black](https://black.readthedocs.io/en/stable/#) for code formatting
@@ -23,8 +25,8 @@ The set up includes:
 
 # Getting Started
 
-1. Click on the `Use this template` button to create a new repository from this template.
-2. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use hyphens instead of spaces or underscores.
+1. Click on the `Use this template` button [at](https://github.com/oedokumaci/template-python) to create a new repository from this template (you must be logged in to GitHub to see the button).
+2. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use -hyphens- instead of spaces or underscores.
 3. Clone the repository to your local machine.
 4. Cd into the repository directory.
 5. Run template_setup.py with
@@ -40,3 +42,4 @@ python template_setup.py
  - Add `template_setup.py` to `.gitignore`
  - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
  - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
+ - Prompts user to include vscode settings
