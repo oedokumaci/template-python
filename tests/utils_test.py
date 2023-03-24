@@ -4,7 +4,7 @@ from typing import Generator
 import pytest
 from pytest import LogCaptureFixture
 
-from template.utils import LOG_PATH, timer_decorator
+from template_python.utils import LOG_PATH, timer_decorator
 
 
 @pytest.mark.parametrize(

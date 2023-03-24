@@ -2,7 +2,7 @@
 
 import typer
 
-from template.utils import LOG_PATH, init_logger
+from template_python.utils import LOG_PATH, init_logger
 
 log_file_name_argument = typer.Argument(
     "logs.log", help="Name of the log file, default is 'logs.log'"

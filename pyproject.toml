@@ -9,7 +9,7 @@ workflow = [
 ]
 
 [project]
-name = "template"
+name = "template-python"
 version = "0.1.0"
 description = ""
 authors = [
