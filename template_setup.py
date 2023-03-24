@@ -28,33 +28,31 @@ def rename_files(
     dir_paths = [CURRENT_PROJECT_PATH / path for path in dir_paths]
 
     for path in file_paths:
-        if path.exists():
-            with open(path, encoding="utf-8") as file:
-                contents = file.read()
-            new_contents = contents.replace(old_word, new_word)
+        with open(path, encoding="utf-8") as file:
+            contents = file.read()
+        new_contents = contents.replace(old_word, new_word)
 
-            with open(path, "w", encoding="utf-8") as file:
-                file.write(new_contents)
+        with open(path, "w", encoding="utf-8") as file:
+            file.write(new_contents)
 
-            new_path = path.with_name(path.name.replace(old_word, new_word))
-            path.rename(new_path)
+        new_path = path.with_name(path.name.replace(old_word, new_word))
+        path.rename(new_path)
 
     for path in dir_paths:
-        if path.exists():
-            new_path = path.with_name(path.name.replace(old_word, new_word))
-            path.rename(new_path)
+        new_path = path.with_name(path.name.replace(old_word, new_word))
+        path.rename(new_path)
 
 
 def main() -> None:
     """Main function that setups the project."""
     # Rename file contents, names, and directories
+    rename_files("template-python", CURRENT_PROJECT_PATH.name, FILE_PATHS, [])
     rename_files(
         "template_python",
         CURRENT_PROJECT_PATH.name.replace("-", "_"),
         FILE_PATHS,
         DIR_PATHS,
     )
-    rename_files("template-python", CURRENT_PROJECT_PATH.name, FILE_PATHS, [])
     while True:
         new_user_name = input("Enter GitHub username: ") or "oedokumaci"
         new_user_email = (
