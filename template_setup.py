@@ -28,19 +28,21 @@ def rename_files(
     dir_paths = [CURRENT_PROJECT_PATH / path for path in dir_paths]
 
     for path in file_paths:
-        with open(path, encoding="utf-8") as file:
-            contents = file.read()
-        new_contents = contents.replace(old_word, new_word)
+        if path.exists():
+            with open(path, encoding="utf-8") as file:
+                contents = file.read()
+            new_contents = contents.replace(old_word, new_word)
 
-        with open(path, "w", encoding="utf-8") as file:
-            file.write(new_contents)
+            with open(path, "w", encoding="utf-8") as file:
+                file.write(new_contents)
 
-        new_path = path.with_name(path.name.replace(old_word, new_word))
-        path.rename(new_path)
+            new_path = path.with_name(path.name.replace(old_word, new_word))
+            path.rename(new_path)
 
     for path in dir_paths:
-        new_path = path.with_name(path.name.replace(old_word, new_word))
-        path.rename(new_path)
+        if path.exists():
+            new_path = path.with_name(path.name.replace(old_word, new_word))
+            path.rename(new_path)
 
 
 def main() -> None:
@@ -92,7 +94,6 @@ def main() -> None:
             subprocess.check_call(["pip", "install", "pdm"])
     # make __pypackages__ directory
     (CURRENT_PROJECT_PATH / "__pypackages__").mkdir(exist_ok=True)
-    subprocess.check_call(["pdm", "lock", "-v"])
     subprocess.check_call(["pdm", "install"])
     subprocess.check_call(["pdm", "run", "pre-commit", "install"])
 
