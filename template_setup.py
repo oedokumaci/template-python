@@ -71,6 +71,10 @@ def main() -> None:
         "oral.ersoy.dokumaci@gmail.com", new_user_email, USER_REPLACE_PATHS, []
     )
 
+    # GitHub configuration
+    subprocess.check_call(["git", "config", "user.name", new_user_name])
+    subprocess.check_call(["git", "config", "user.email", new_user_email])
+
     # Rename README.md
     if (CURRENT_PROJECT_PATH / "README.md").exists():
         (CURRENT_PROJECT_PATH / "README.md").unlink()
@@ -115,6 +119,15 @@ def main() -> None:
 }
                 """
             )
+
+    # Git add commit and push
+    answer = input("Do you want to git add commit and push? (y/n) ") or "y"
+    if answer == "y":
+        subprocess.check_call(["git", "add", "."])
+        subprocess.check_call(
+            ["git", "commit", "-m", "Initialize using template_setup.py"]
+        )
+        subprocess.check_call(["git", "push"])
 
 
 if __name__ == "__main__":

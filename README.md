@@ -27,7 +27,7 @@ The project setup includes:
 
 1. Click on the `Use this template` button [at](https://github.com/oedokumaci/template-python) to create a new repository from this template (you must be logged in to GitHub to see the button).
 2. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use -hyphens- instead of spaces or underscores.
-3. Clone the repository to your local machine.
+3. Git clone the repository to your local machine.
 4. Cd into the repository directory.
 5. Run template_setup.py with
 ```bash
@@ -36,10 +36,13 @@ python template_setup.py
 
 ### Running the setup script will:
  - Rename file contents, names, and directories that contains template repository name with the new repository name
+ - Prompt user for GitHub username and email
  - Rename user name in `pyproject.toml` and `README_main.md`
  - Rename user email in `pyproject.toml`
+ - Configure GitHub username and email locally
  - Remove `README.md` and rename `README_main.md` to `README.md`
  - Add `template_setup.py` to `.gitignore`
  - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
  - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
- - Prompts user an option include `.vscode/settings.json`
+ - Prompt user an option include `.vscode/settings.json`
+ - Prompt user an option to git add commit and push
