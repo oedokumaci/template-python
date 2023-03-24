@@ -38,8 +38,8 @@ python template_setup.py
  - Rename file contents, names, and directories that contains template repository name with the new repository name
  - Rename user name in `pyproject.toml` and `README_main.md`
  - Rename user email in `pyproject.toml`
- - Remove README.md and rename `README_main.md` to `README.md`
+ - Remove `README.md` and rename `README_main.md` to `README.md`
  - Add `template_setup.py` to `.gitignore`
  - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
  - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
- - Prompts user to include vscode settings
+ - Prompts user an option include `.vscode/settings.json`
