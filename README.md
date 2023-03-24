@@ -25,7 +25,7 @@ The project setup includes:
 
 # Getting Started
 
-1. Click on the `Use this template` button [at](https://github.com/oedokumaci/template-python) to create a new repository from this template (you must be logged in to GitHub to see the button).
+1. Click on the `Use this template` button [at this page](https://github.com/oedokumaci/template-python) to create a new repository from this template (you must be logged in to GitHub to see the button).
 2. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use -hyphens- instead of spaces or underscores.
 3. Git clone the repository to your local machine.
 4. Cd into the repository directory.
