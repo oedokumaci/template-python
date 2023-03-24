@@ -41,12 +41,12 @@ jobs:
       uses: pdm-project/setup-pdm@v3
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Resolving dependencies
-      run: pdm lock -v
+  
+    - name: Make __pypackages__ directory
+      run: mkdir __pypackages__
 
     - name: Install dependencies
       run: pdm install
 
     - name: Run pytest-check
-      run: pdm run pre-commit run pytest-check
+      run: pdm run pre-commit run pytest-check -v
