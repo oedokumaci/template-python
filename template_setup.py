@@ -39,20 +39,25 @@ def rename_files(
         path.rename(new_path)
 
     for path in dir_paths:
-        new_path = path.with_name(
-            path.name.replace(old_word, new_word)
-        )
+        new_path = path.with_name(path.name.replace(old_word, new_word))
         path.rename(new_path)
 
 
 def main() -> None:
     """Main function that setups the project."""
     # Rename file contents, names, and directories
-    rename_files("template_python", CURRENT_PROJECT_PATH.name.replace("-", "_"), FILE_PATHS, DIR_PATHS)
-    rename_files("template-python", CURRENT_PROJECT_PATH.name, USER_REPLACE_PATHS, [])
+    rename_files(
+        "template_python",
+        CURRENT_PROJECT_PATH.name.replace("-", "_"),
+        FILE_PATHS,
+        DIR_PATHS,
+    )
+    rename_files("template-python", CURRENT_PROJECT_PATH.name, FILE_PATHS, [])
     while True:
         new_user_name = input("Enter GitHub username: ") or "oedokumaci"
-        new_user_email = input("Enter GitHub email: ") or "oral.ersoy.dokumaci@gmail.com"
+        new_user_email = (
+            input("Enter GitHub email: ") or "oral.ersoy.dokumaci@gmail.com"
+        )
         answer = (
             input(
                 f"Is the information correct? (y/n) {new_user_name} {new_user_email} "
@@ -95,19 +100,21 @@ def main() -> None:
     answer = input("Do you want to generate .vscode/settings.json? (y/n) ") or "y"
     if answer == "y":
         (CURRENT_PROJECT_PATH / ".vscode").mkdir(exist_ok=True)
-        file = (CURRENT_PROJECT_PATH / ".vscode" / "settings.json")
+        file = CURRENT_PROJECT_PATH / ".vscode" / "settings.json"
         file.touch()
         with open(file, "w", encoding="utf-8") as f:
             f.write(
-                """{
-                    "python.linting.pylintEnabled": false,
-                    "python.linting.enabled": true,
-                    "python.linting.flake8Enabled": true,
-                    "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
-                    "python.autoComplete.extraPaths": ["__pypackages__/3.10/lib"],
-                    "python.analysis.extraPaths": ["__pypackages__/3.10/lib"],
-                    "python.testing.pytestPath": "__pypackages__/3.10/bin/pytest"
-                }"""
+                """
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
+    "python.autoComplete.extraPaths": ["__pypackages__/3.10/lib"],
+    "python.analysis.extraPaths": ["__pypackages__/3.10/lib"],
+    "python.testing.pytestPath": "__pypackages__/3.10/bin/pytest"
+}
+                """
             )
 
 

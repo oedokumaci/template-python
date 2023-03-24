@@ -1,4 +1,4 @@
-"""Command line application module for Gale-Shapley algorithm."""
+"""Command line application module."""
 
 import typer
 
