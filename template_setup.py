@@ -75,8 +75,8 @@ def main() -> None:
     )
 
     # GitHub configuration
-    subprocess.check_call(["git", "config", "user.name", new_user_name])
-    subprocess.check_call(["git", "config", "user.email", new_user_email])
+    subprocess.run(["git", "config", "user.name", new_user_name], check=True)
+    subprocess.run(["git", "config", "user.email", new_user_email], check=True)
 
     # Rename README.md
     if (CURRENT_PROJECT_PATH / "README.md").exists():
@@ -89,28 +89,28 @@ def main() -> None:
     with open(CURRENT_PROJECT_PATH / ".gitignore", "a", encoding="utf-8") as f:
         f.write("\n" + "# Template setup file" + "\n" + Path(__file__).name + "\n")
 
-    subprocess.check_call(["git", "rm", "--cached", Path(__file__).name])
+    subprocess.run(["git", "rm", "--cached", Path(__file__).name], check=True)
 
     # Run pdm install
     try:
-        subprocess.check_call(["pdm", "--version"])
+        subprocess.run(["pdm", "--version"], check=True)
     except subprocess.CalledProcessError:
         try:
-            subprocess.check_call(["pip3", "install", "pdm"])
+            subprocess.run(["pip3", "install", "pdm"], check=True)
         except subprocess.CalledProcessError:
-            subprocess.check_call(["pip", "install", "pdm"])
-    subprocess.check_call(["rm", "requirements.txt"])
-    subprocess.check_call(["pdm", "self", "update"])
-    subprocess.check_call(["pdm", "init", "--python", "3.10"])
-    subprocess.check_call(["pdm", "add", "typer"])
-    subprocess.check_call(["pdm", "add", "pyyaml"])
-    subprocess.check_call(["pdm", "add", "-dG", "workflow", "pdm"])
-    subprocess.check_call(["pdm", "add", "-dG", "workflow", "pre-commit"])
-    subprocess.check_call(["pdm", "add", "-dG", "test", "pytest"])
-    subprocess.check_call(["pdm", "run", "pre-commit", "install"])
+            subprocess.run(["pip", "install", "pdm"], check=True)
+    subprocess.run(["rm", "requirements.txt"], check=True)
+    subprocess.run(["pdm", "self", "update"], check=True)
+    subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
+    subprocess.run(["pdm", "add", "typer"], check=True)
+    subprocess.run(["pdm", "add", "pyyaml"], check=True)
+    subprocess.run(["pdm", "add", "-dG", "workflow", "pdm"], check=True)
+    subprocess.run(["pdm", "add", "-dG", "workflow", "pre-commit"], check=True)
+    subprocess.run(["pdm", "add", "-dG", "test", "pytest"], check=True)
+    subprocess.run(["pdm", "run", "pre-commit", "install"], check=True)
     try:
-        subprocess.check_call(
-            ["pdm", "run", "pre-commit", "run", "--all-files", "pdm-export"]
+        subprocess.run(
+            ["pdm", "run", "pre-commit", "run", "--all-files", "pdm-export"], check=True
         )
     except subprocess.CalledProcessError:
         print("Pdm-export expected to fail, this is normal. Continuing...")
@@ -139,11 +139,14 @@ def main() -> None:
     # Git add commit and push
     answer = input("Do you want to git add commit and push? [y/n] (y) ") or "y"
     if answer == "y":
-        subprocess.check_call(["git", "add", "."])
-        subprocess.check_call(
-            ["git", "commit", "-m", "Initialize using template_setup.py"]
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(
+            ["git", "commit", "-m", "Initialize using template_setup.py"], check=True
         )
-        subprocess.check_call(["git", "push"])
+        subprocess.run(["git", "push"], check=True)
+
+    subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
+    subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
 
 
 if __name__ == "__main__":
