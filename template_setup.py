@@ -156,6 +156,12 @@ def main() -> None:
     except subprocess.CalledProcessError:
         pass
 
+    # Remove .pdm.toml
+    try:
+        subprocess.run(["rm", "-rf", ".pdm.toml"], check=True)
+    except subprocess.CalledProcessError:
+        pass
+
     print("Setup complete!")
 
 
