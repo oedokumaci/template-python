@@ -89,6 +89,8 @@ def main() -> None:
     with open(CURRENT_PROJECT_PATH / ".gitignore", "a", encoding="utf-8") as f:
         f.write("\n" + "# Template setup file" + "\n" + Path(__file__).name + "\n")
 
+    subprocess.check_call(["git", "rm", "--cached", Path(__file__).name])
+
     # Run pdm install
     try:
         subprocess.check_call(["pdm", "--version"])
