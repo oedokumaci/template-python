@@ -114,6 +114,7 @@ def main() -> None:
         )
     except subprocess.CalledProcessError:
         print("Pdm-export expected to fail, this is normal. Continuing...")
+    subprocess.run(["pdm", "fix"], check=True)
 
     # Generate .vscode/settings.json
     answer = input("Do you want to generate .vscode/settings.json? [y/n] (y) ") or "y"
@@ -145,8 +146,16 @@ def main() -> None:
         )
         subprocess.run(["git", "push"], check=True)
 
-    subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
-    subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
+    # Remove cached files
+    try:
+        subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
+    except subprocess.CalledProcessError:
+        pass
+    try:
+        subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
+    except subprocess.CalledProcessError:
+        pass
+
     print("Setup complete!")
 
 
