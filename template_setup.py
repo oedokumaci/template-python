@@ -102,10 +102,10 @@ def main() -> None:
     subprocess.check_call(["pdm", "add", "-dG", "workflow", "pdm"])
     subprocess.check_call(["pdm", "add", "-dG", "workflow", "pre-commit"])
     subprocess.check_call(["pdm", "add", "-dG", "test", "pytest"])
-    subprocess.check_call(
-        ["pdm", "export", "-o", "requirements.txt", "--without-hashes"]
-    )
     subprocess.check_call(["pdm", "run", "pre-commit", "install"])
+    subprocess.check_call(
+        ["pdm", "run", "pre-commit", "run", "--all-files", "pdm-export"]
+    )
 
     # Generate .vscode/settings.json
     answer = input("Do you want to generate .vscode/settings.json? (y/n) ") or "y"
