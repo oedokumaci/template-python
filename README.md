@@ -44,7 +44,6 @@ python template_setup.py
  - Remove `README.md` and rename `README_main.md` to `README.md`
  - Add `template_setup.py` to `.gitignore`
  - Pip install [PDM](https://pdm.fming.dev/latest/) in your local machine
-   - Update [PDM](https://pdm.fming.dev/latest/) to latest version if already installed
  - [PDM](https://pdm.fming.dev/latest/) init with Python 3.10. Please select the following options when prompted:
    - Select 'n' to not create a virtual environment
    - Select 'y' to make project installable

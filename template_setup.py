@@ -94,7 +94,6 @@ def main() -> None:
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
     subprocess.run(["rm", "requirements.txt"], check=True)
-    subprocess.run(["pdm", "self", "update"], check=True)
     subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
@@ -116,8 +115,8 @@ def main() -> None:
         (CURRENT_PROJECT_PATH / ".vscode").mkdir(exist_ok=True)
         file = CURRENT_PROJECT_PATH / ".vscode" / "settings.json"
         file.touch()
-        with open(file, "w", encoding="utf-8") as f:
-            f.write(
+        with open(file, "w", encoding="utf-8") as file:
+            file.write(
                 """
 {
     "python.linting.pylintEnabled": false,
@@ -130,6 +129,20 @@ def main() -> None:
 }
                 """
             )
+
+    # Add .pdm.toml to .gitignore
+    with open(CURRENT_PROJECT_PATH / ".gitignore", "r+", encoding="utf-8") as file:
+        contents = file.readlines()
+        index_to_add = contents.index(".pdm-python\n")
+        contents.insert(index_to_add, ".pdm.toml\n")
+        file.seek(0)
+        file.writelines(contents)
+
+    # Remove template setup file
+    try:
+        subprocess.run(["rm", "-rf", f"{Path(__file__).name}"], check=True)
+    except subprocess.CalledProcessError:
+        pass
 
     # Git add commit and push
     answer = input("Do you want to git add commit and push? [y/n] (y) ") or "y"
@@ -147,21 +160,6 @@ def main() -> None:
         pass
     try:
         subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
-    except subprocess.CalledProcessError:
-        pass
-
-    # Add .pdm.toml to .gitignore
-    with open(CURRENT_PROJECT_PATH / ".gitignore", "a", encoding="utf-8") as f:
-        contents = f.readlines()
-        index_to_add = contents.index(".pdm-python\n")
-        contents = contents.insert(index_to_add, ".pdm.toml\n")
-        f.writelines(contents)
-
-    subprocess.run(["git", "rm", "--cached", ".pdm.toml"], check=True)
-
-    # Remove template setup file
-    try:
-        subprocess.run(["rm", "-rf", f"{Path(__file__).name}"], check=True)
     except subprocess.CalledProcessError:
         pass
 

@@ -196,7 +196,7 @@ summary = "plugin and hook calling mechanisms for python"
 
 [[package]]
 name = "pre-commit"
-version = "3.2.0"
+version = "3.2.1"
 requires_python = ">=3.8"
 summary = "A framework for managing and maintaining multi-language pre-commit hooks."
 dependencies = [
@@ -348,7 +348,7 @@ dependencies = [
 [metadata]
 lock_version = "4.2"
 groups = ["default", "test", "workflow"]
-content_hash = "sha256:a973ccf4f65237db9e9b6ad97ed266d87a9d7f2859c3a27ae06d74e5b48ab948"
+content_hash = "sha256:9c4d4673b29fbf59e61a4dd3bbdee981aeb669e080d0f8ea4b5fe77323ce14f5"
 
 [metadata.files]
 "attrs 22.2.0" = [
@@ -585,9 +585,9 @@ content_hash = "sha256:a973ccf4f65237db9e9b6ad97ed266d87a9d7f2859c3a27ae06d74e5b
     {url = "https://files.pythonhosted.org/packages/9e/01/f38e2ff29715251cf25532b9082a1589ab7e4f571ced434f98d0139336dc/pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
     {url = "https://files.pythonhosted.org/packages/a1/16/db2d7de3474b6e37cbb9c008965ee63835bba517e22cdb8c35b5116b5ce1/pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
-"pre-commit 3.2.0" = [
-    {url = "https://files.pythonhosted.org/packages/59/5d/157a051b2a402d7d27eb7c478fd7c1a231b94779054b3d7aef1719378e2d/pre_commit-3.2.0.tar.gz", hash = "sha256:818f0d998059934d0f81bb3667e3ccdc32da6ed7ccaac33e43dc231561ddaaa9"},
-    {url = "https://files.pythonhosted.org/packages/c6/99/f068bcb1fd31ec4de7852732c99e5fc18d8f22bf3c471646b9f077a83c01/pre_commit-3.2.0-py2.py3-none-any.whl", hash = "sha256:f712d3688102e13c8e66b7d7dbd8934a6dda157e58635d89f7d6fecdca39ce8a"},
+"pre-commit 3.2.1" = [
+    {url = "https://files.pythonhosted.org/packages/bb/f3/79fe9f652706ab3011d9ee87e18fb7d43ccd0e652f4c8ed36ee4ad42c3dd/pre_commit-3.2.1-py2.py3-none-any.whl", hash = "sha256:a06a7fcce7f420047a71213c175714216498b49ebc81fe106f7716ca265f5bb6"},
+    {url = "https://files.pythonhosted.org/packages/c9/31/5055de265076eb86e5088b5439aefb948b1aba23f2984aa9a075aae5d9e1/pre_commit-3.2.1.tar.gz", hash = "sha256:b5aee7d75dbba21ee161ba641b01e7ae10c5b91967ebf7b2ab0dfae12d07e1f1"},
 ]
 "pygments 2.14.0" = [
     {url = "https://files.pythonhosted.org/packages/0b/42/d9d95cc461f098f204cd20c85642ae40fbff81f74c300341b8d0e0df14e0/Pygments-2.14.0-py3-none-any.whl", hash = "sha256:fa7bd7bd2771287c0de303af8bfdfc731f51bd2c6a47ab69d117138893b82717"},
