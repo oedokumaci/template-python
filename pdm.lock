@@ -346,7 +346,8 @@ dependencies = [
 ]
 
 [metadata]
-lock_version = "4.1"
+lock_version = "4.2"
+groups = ["default", "test", "workflow"]
 content_hash = "sha256:a973ccf4f65237db9e9b6ad97ed266d87a9d7f2859c3a27ae06d74e5b48ab948"
 
 [metadata.files]
