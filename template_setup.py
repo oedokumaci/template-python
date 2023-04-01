@@ -147,6 +147,7 @@ def main() -> None:
 
     subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
     subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
+    print("Setup complete!")
 
 
 if __name__ == "__main__":
