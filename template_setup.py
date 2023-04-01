@@ -53,14 +53,17 @@ def main() -> None:
         FILE_PATHS,
         DIR_PATHS,
     )
+    print("Setting up the project...")
+    print("Prompt default values are in parentheses, press enter to accept them.")
     while True:
-        new_user_name = input("Enter GitHub username: ") or "oedokumaci"
+        new_user_name = input("Enter GitHub username (oedokumaci): ") or "oedokumaci"
         new_user_email = (
-            input("Enter GitHub email: ") or "oral.ersoy.dokumaci@gmail.com"
+            input("Enter GitHub email (oral.ersoy.dokumaci@gmail.com): ")
+            or "oral.ersoy.dokumaci@gmail.com"
         )
         answer = (
             input(
-                f"Is the information correct? (y/n) {new_user_name} {new_user_email} "
+                f"Is the information correct? [y/n] (y) {new_user_name} {new_user_email} "
             )
             or "y"
         )
@@ -103,12 +106,15 @@ def main() -> None:
     subprocess.check_call(["pdm", "add", "-dG", "workflow", "pre-commit"])
     subprocess.check_call(["pdm", "add", "-dG", "test", "pytest"])
     subprocess.check_call(["pdm", "run", "pre-commit", "install"])
-    subprocess.check_call(
-        ["pdm", "run", "pre-commit", "run", "--all-files", "pdm-export"]
-    )
+    try:
+        subprocess.check_call(
+            ["pdm", "run", "pre-commit", "run", "--all-files", "pdm-export"]
+        )
+    except subprocess.CalledProcessError:
+        print("Pdm-export expected to fail, this is normal. Continuing...")
 
     # Generate .vscode/settings.json
-    answer = input("Do you want to generate .vscode/settings.json? (y/n) ") or "y"
+    answer = input("Do you want to generate .vscode/settings.json? [y/n] (y) ") or "y"
     if answer == "y":
         (CURRENT_PROJECT_PATH / ".vscode").mkdir(exist_ok=True)
         file = CURRENT_PROJECT_PATH / ".vscode" / "settings.json"
@@ -129,7 +135,7 @@ def main() -> None:
             )
 
     # Git add commit and push
-    answer = input("Do you want to git add commit and push? (y/n) ") or "y"
+    answer = input("Do you want to git add commit and push? [y/n] (y) ") or "y"
     if answer == "y":
         subprocess.check_call(["git", "add", "."])
         subprocess.check_call(
