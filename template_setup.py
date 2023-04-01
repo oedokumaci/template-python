@@ -114,6 +114,7 @@ def main() -> None:
         )
     except subprocess.CalledProcessError:
         print("Pdm-export expected to fail during setup, this is normal. Continuing...")
+    subprocess.run(["pdm", "fix"], check=True)
 
     # Generate .vscode/settings.json
     answer = input("Do you want to generate .vscode/settings.json? [y/n] (y) ") or "y"
