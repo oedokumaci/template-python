@@ -94,9 +94,13 @@ def main() -> None:
             subprocess.check_call(["pip3", "install", "pdm"])
         except subprocess.CalledProcessError:
             subprocess.check_call(["pip", "install", "pdm"])
-    # make __pypackages__ directory
-    (CURRENT_PROJECT_PATH / "__pypackages__").mkdir(exist_ok=True)
-    subprocess.check_call(["pdm", "install"])
+    subprocess.check_call(["rm", "requirements.txt"])
+    subprocess.check_call(["pdm", "init", "--python", "3.10"])
+    subprocess.check_call(["pdm", "add", "typer"])
+    subprocess.check_call(["pdm", "add", "pyyaml"])
+    subprocess.check_call(["pdm", "add", "-dG", "workflow", "pdm"])
+    subprocess.check_call(["pdm", "add", "-dG", "workflow", "pre-commit"])
+    subprocess.check_call(["pdm", "add", "-dG", "test", "pytest"])
     subprocess.check_call(["pdm", "run", "pre-commit", "install"])
 
     # Generate .vscode/settings.json
