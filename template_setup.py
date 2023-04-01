@@ -95,12 +95,16 @@ def main() -> None:
         except subprocess.CalledProcessError:
             subprocess.check_call(["pip", "install", "pdm"])
     subprocess.check_call(["rm", "requirements.txt"])
+    subprocess.check_call(["pdm", "self", "update"])
     subprocess.check_call(["pdm", "init", "--python", "3.10"])
     subprocess.check_call(["pdm", "add", "typer"])
     subprocess.check_call(["pdm", "add", "pyyaml"])
     subprocess.check_call(["pdm", "add", "-dG", "workflow", "pdm"])
     subprocess.check_call(["pdm", "add", "-dG", "workflow", "pre-commit"])
     subprocess.check_call(["pdm", "add", "-dG", "test", "pytest"])
+    subprocess.check_call(
+        ["pdm", "export", "-o", "requirements.txt", "--without-hashes"]
+    )
     subprocess.check_call(["pdm", "run", "pre-commit", "install"])
 
     # Generate .vscode/settings.json
