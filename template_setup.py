@@ -85,12 +85,6 @@ def main() -> None:
             CURRENT_PROJECT_PATH / "README.md"
         )
 
-    # Add this file to .gitignore
-    with open(CURRENT_PROJECT_PATH / ".gitignore", "a", encoding="utf-8") as f:
-        f.write("\n" + "# Template setup file" + "\n" + Path(__file__).name + "\n")
-
-    subprocess.run(["git", "rm", "--cached", Path(__file__).name], check=True)
-
     # Run pdm install
     try:
         subprocess.run(["pdm", "--version"], check=True)
@@ -156,9 +150,18 @@ def main() -> None:
     except subprocess.CalledProcessError:
         pass
 
-    # Remove .pdm.toml
+    # Add .pdm.toml to .gitignore
+    with open(CURRENT_PROJECT_PATH / ".gitignore", "a", encoding="utf-8") as f:
+        contents = f.readlines()
+        index_to_add = contents.index(".pdm-python\n")
+        contents = contents.insert(index_to_add, ".pdm.toml\n")
+        f.writelines(contents)
+
+    subprocess.run(["git", "rm", "--cached", ".pdm.toml"], check=True)
+
+    # Remove template setup file
     try:
-        subprocess.run(["rm", "-rf", ".pdm.toml"], check=True)
+        subprocess.run(["rm", "-rf", f"{Path(__file__).name}"], check=True)
     except subprocess.CalledProcessError:
         pass
 
