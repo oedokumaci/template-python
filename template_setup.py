@@ -86,6 +86,13 @@ def main() -> None:
         (ROOT_DIR / "README.md").unlink()
         (ROOT_DIR / "README_main.md").rename(ROOT_DIR / "README.md")
 
+    # Remove last four lines from .gitignore
+    with open(ROOT_DIR / ".gitignore", "r+", encoding="utf-8") as file:
+        contents = file.readlines()
+        contents = contents[:-4]
+        file.seek(0)
+        file.writelines(contents)
+
     # Run pdm init
     try:
         subprocess.run(["pdm", "--version"], check=True)
@@ -131,13 +138,6 @@ def main() -> None:
 }
                 """
             )
-
-    # Remove last four lines from .gitignore
-    with open(ROOT_DIR / ".gitignore", "r+", encoding="utf-8") as file:
-        contents = file.readlines()
-        contents = contents[:-4]
-        file.seek(0)
-        file.writelines(contents)
 
     # Remove template setup file
     try:
