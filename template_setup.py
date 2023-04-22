@@ -86,12 +86,10 @@ def main() -> None:
         (ROOT_DIR / "README.md").unlink()
         (ROOT_DIR / "README_main.md").rename(ROOT_DIR / "README.md")
 
-    # Remove last four lines from .gitignore
-    with open(ROOT_DIR / ".gitignore", "r+", encoding="utf-8") as file:
-        contents = file.readlines()
-        contents = contents[:-4]
-        file.seek(0)
-        file.writelines(contents)
+    # Remove three pdm files from the project
+    files = ["pdm.lock", "pyproject.toml", "requirements.txt"]
+    for file in files:
+        subprocess.run(["rm", file], check=True)
 
     # Run pdm init
     try:
