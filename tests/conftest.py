@@ -3,12 +3,13 @@ from typing import Generator
 
 import pytest
 
-from template_python.utils import LOG_PATH, init_logger
+from template_python.path import LOGS_DIR
+from template_python.utils import init_logger
 
 
 @pytest.fixture(scope="package")
 def logger_fixture() -> Generator[None, None, None]:
-    log_file_path = LOG_PATH / "pytest_test.log"
+    log_file_path = LOGS_DIR / "pytest_test.log"
     init_logger(log_file_path.name)
     yield
     logger = logging.getLogger()

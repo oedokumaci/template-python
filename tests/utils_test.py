@@ -4,7 +4,8 @@ from typing import Generator
 import pytest
 from pytest import LogCaptureFixture
 
-from template_python.utils import LOG_PATH, timer_decorator
+from template_python.path import LOGS_DIR
+from template_python.utils import timer_decorator
 
 
 @pytest.mark.parametrize(
@@ -23,7 +24,7 @@ def test_init_logger(
     logging.log(level, msg)
 
     # Assert that the log file was created in the correct directory
-    log_file_path = LOG_PATH / "pytest_test.log"
+    log_file_path = LOGS_DIR / "pytest_test.log"
     assert log_file_path.is_file()
 
     # Assert that the correct logs were produced
