@@ -58,9 +58,10 @@ def main() -> None:
     )
     print("Files and directories renamed.")
     while True:
-        new_user_name = input("Enter GitHub username: ") or "oedokumaci"
+        new_user_name = input("Enter GitHub username (oedokumaci): ") or "oedokumaci"
         new_user_email = (
-            input("Enter GitHub email: ") or "oral.ersoy.dokumaci@gmail.com"
+            input("Enter GitHub email (oral.ersoy.dokumaci@gmail.com): ")
+            or "oral.ersoy.dokumaci@gmail.com"
         )
         answer = (
             input(
@@ -84,7 +85,7 @@ def main() -> None:
     # Rename README.md
     if (ROOT_DIR / "README.md").exists():
         (ROOT_DIR / "README.md").unlink()
-        (ROOT_DIR / "README_main.md").rename(ROOT_DIR / "README.md")
+    (ROOT_DIR / "README_main.md").rename(ROOT_DIR / "README.md")
 
     # Remove three pdm files from the project
     files = ["pdm.lock", "pyproject.toml", "requirements.txt"]
@@ -99,8 +100,8 @@ def main() -> None:
             subprocess.run(["pip3", "install", "pdm"], check=True)
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
-    subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
     subprocess.run(["pdm", "self", "update"], check=True)
+    subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
     subprocess.run(["pdm", "add", "pdm"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
