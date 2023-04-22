@@ -138,3 +138,7 @@ dmypy.json
 
 # MacOS
 .DS_Store
+
+pdm.lock
+pyproject.toml
+requirements.txt
