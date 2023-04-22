@@ -3,9 +3,9 @@
 import subprocess
 from pathlib import Path
 
-from template_python.path import ROOT_DIR
+ROOT_DIR = Path(__file__).parent
 
-USER_REPLACE_PATHS = ["pyproject.toml", "README_main.md"]
+USER_REPLACE_PATHS = ["README_main.md"]
 SRC_PATHS = [str(path) for path in (ROOT_DIR / "src").rglob("*.py")]
 TESTS_PATHS = [str(path) for path in (ROOT_DIR / "tests").rglob("*.py")]
 
