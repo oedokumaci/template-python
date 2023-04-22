@@ -37,18 +37,20 @@ python template_setup.py
 
 ### Running the setup script will:
  - Rename file contents, names, and directories that contains template repository name with the new repository name
- - Prompt user for GitHub username and email
- - Rename user name in `pyproject.toml` and `README_main.md`
- - Rename user email in `pyproject.toml`
- - Configure GitHub username and email locally
+ - Prompt user for GitHub user name and user email
+ - Rename user name and user email in and `README_main.md`
+ - Configure GitHub user name and user email locally
+ - Remove `pdm.lock`, `pyproject.toml`, and `requirements.txt`
  - Remove `README.md` and rename `README_main.md` to `README.md`
- - Add `template_setup.py` to `.gitignore`
- - Pip install [PDM](https://pdm.fming.dev/latest/) in your local machine
- - [PDM](https://pdm.fming.dev/latest/) init with Python 3.10. Please select the following options when prompted:
+ - If not installed pip install [PDM](https://pdm.fming.dev/latest/) in your local machine
+ - Update PDM to the latest version
+ - [PDM](https://pdm.fming.dev/latest/) init with Python 3.10. Select the following options when prompted:
    - Select 'n' to not create a virtual environment
    - Select 'y' to make project installable
    - Select 'pdm-pep517' to use PEP 517 build backend
  - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
  - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
  - Prompt user an option include `.vscode/settings.json`
+ - Remove `template_setup.py`
  - Prompt user an option to git add commit and push
+ - Remove `.mypy_cache` and `.pytest_cache` folders

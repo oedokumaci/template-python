@@ -15,6 +15,8 @@
 
 </div>
 
+&nbsp;
+
 # User Guide
 
 ## Requirements
@@ -67,7 +69,7 @@ pdm --pep582 >> ~/.bash_profile
 
 Similarly, for zsh run
 
-```bash
+```zsh
 pdm --pep582 >> ~/.zshrc
 ```
 Then `git clone` the project and `mkdir __pypackages__` in the project directory. This lets [PDM] know that you are using [PEP 582] instead of virtualenv. Now you can `pdm install`, which will install all the dependencies in the project directory.
