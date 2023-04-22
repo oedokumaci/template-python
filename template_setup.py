@@ -1,6 +1,7 @@
 """This module is to setup the new project."""
 
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).parent
@@ -11,6 +12,8 @@ TESTS_PATHS = [str(path) for path in (ROOT_DIR / "tests").rglob("*.py")]
 
 FILE_PATHS = USER_REPLACE_PATHS + SRC_PATHS + TESTS_PATHS
 DIR_PATHS = [str(ROOT_DIR / "src" / "template_python")]
+
+OS = "windows-based" if sys.platform.startswith("win") else "unix-based"
 
 
 def rename_files(
@@ -47,6 +50,7 @@ def main() -> None:
     """Main function that setups the project."""
     print("Setting up the project...")
     print("Prompt default values will be in parentheses, press enter to accept them.")
+    print(f"Detected {OS=}")
     # Rename file contents, names, and directories
     print("Renaming files and directories...")
     rename_files("template-python", ROOT_DIR.name, FILE_PATHS, [])
@@ -90,7 +94,10 @@ def main() -> None:
     # Remove three pdm files from the project
     files = ["pdm.lock", "pyproject.toml", "requirements.txt"]
     for file in files:
-        subprocess.run(["rm", file], check=True)
+        if OS == "windows-based":
+            subprocess.run(["del", file], check=True)
+        else:
+            subprocess.run(["rm", file], check=True)
 
     # Run pdm init
     try:
@@ -140,7 +147,10 @@ def main() -> None:
 
     # Remove template setup file
     try:
-        subprocess.run(["rm", "-rf", f"{Path(__file__).name}"], check=True)
+        if OS == "windows-based":
+            subprocess.run(["del", f"{Path(__file__).name}"], check=True)
+        else:
+            subprocess.run(["rm", f"{Path(__file__).name}"], check=True)
     except subprocess.CalledProcessError:
         pass
 
@@ -155,11 +165,17 @@ def main() -> None:
 
     # Remove cached files
     try:
-        subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
+        if OS == "windows-based":
+            subprocess.run(["rmdir", "/s", "/q", ".mypy_cache"], check=True)
+        else:
+            subprocess.run(["rm", "-rf", ".mypy_cache"], check=True)
     except subprocess.CalledProcessError:
         pass
     try:
-        subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
+        if OS == "windows-based":
+            subprocess.run(["rmdir", "/s", "/q", ".pytest_cache"], check=True)
+        else:
+            subprocess.run(["rm", "-rf", ".pytest_cache"], check=True)
     except subprocess.CalledProcessError:
         pass
 
