@@ -3,14 +3,14 @@
 import subprocess
 from pathlib import Path
 
-CURRENT_PROJECT_PATH = Path(__file__).parent
+from template_python.path import ROOT_DIR
 
 USER_REPLACE_PATHS = ["pyproject.toml", "README_main.md"]
-SRC_PATHS = [str(path) for path in (CURRENT_PROJECT_PATH / "src").rglob("*.py")]
-TESTS_PATHS = [str(path) for path in (CURRENT_PROJECT_PATH / "tests").rglob("*.py")]
+SRC_PATHS = [str(path) for path in (ROOT_DIR / "src").rglob("*.py")]
+TESTS_PATHS = [str(path) for path in (ROOT_DIR / "tests").rglob("*.py")]
 
 FILE_PATHS = USER_REPLACE_PATHS + SRC_PATHS + TESTS_PATHS
-DIR_PATHS = [str(CURRENT_PROJECT_PATH / "src" / "template_python")]
+DIR_PATHS = [str(ROOT_DIR / "src" / "template_python")]
 
 
 def rename_files(
@@ -24,8 +24,8 @@ def rename_files(
         file_paths (list[str])
         dir_paths (list[str])
     """
-    file_paths = [CURRENT_PROJECT_PATH / path for path in file_paths]
-    dir_paths = [CURRENT_PROJECT_PATH / path for path in dir_paths]
+    file_paths = [ROOT_DIR / path for path in file_paths]
+    dir_paths = [ROOT_DIR / path for path in dir_paths]
 
     for path in file_paths:
         with open(path, encoding="utf-8") as file:
@@ -45,21 +45,22 @@ def rename_files(
 
 def main() -> None:
     """Main function that setups the project."""
+    print("Setting up the project...")
+    print("Prompt default values will be in parentheses, press enter to accept them.")
     # Rename file contents, names, and directories
-    rename_files("template-python", CURRENT_PROJECT_PATH.name, FILE_PATHS, [])
+    print("Renaming files and directories...")
+    rename_files("template-python", ROOT_DIR.name, FILE_PATHS, [])
     rename_files(
         "template_python",
-        CURRENT_PROJECT_PATH.name.replace("-", "_"),
+        ROOT_DIR.name.replace("-", "_"),
         FILE_PATHS,
         DIR_PATHS,
     )
-    print("Setting up the project...")
-    print("Prompt default values are in parentheses, press enter to accept them.")
+    print("Files and directories renamed.")
     while True:
-        new_user_name = input("Enter GitHub username (oedokumaci): ") or "oedokumaci"
+        new_user_name = input("Enter GitHub username: ") or "oedokumaci"
         new_user_email = (
-            input("Enter GitHub email (oral.ersoy.dokumaci@gmail.com): ")
-            or "oral.ersoy.dokumaci@gmail.com"
+            input("Enter GitHub email: ") or "oral.ersoy.dokumaci@gmail.com"
         )
         answer = (
             input(
@@ -75,17 +76,17 @@ def main() -> None:
     )
 
     # GitHub configuration
+    print("Configuring GitHub project locals...")
     subprocess.run(["git", "config", "user.name", new_user_name], check=True)
     subprocess.run(["git", "config", "user.email", new_user_email], check=True)
+    print("GitHub project locals configured.")
 
     # Rename README.md
-    if (CURRENT_PROJECT_PATH / "README.md").exists():
-        (CURRENT_PROJECT_PATH / "README.md").unlink()
-        (CURRENT_PROJECT_PATH / "README_main.md").rename(
-            CURRENT_PROJECT_PATH / "README.md"
-        )
+    if (ROOT_DIR / "README.md").exists():
+        (ROOT_DIR / "README.md").unlink()
+        (ROOT_DIR / "README_main.md").rename(ROOT_DIR / "README.md")
 
-    # Run pdm install
+    # Run pdm init
     try:
         subprocess.run(["pdm", "--version"], check=True)
     except subprocess.CalledProcessError:
@@ -93,11 +94,12 @@ def main() -> None:
             subprocess.run(["pip3", "install", "pdm"], check=True)
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
-    subprocess.run(["rm", "requirements.txt"], check=True)
     subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
+    subprocess.run(["pdm", "self", "update"], check=True)
+    subprocess.run(["pdm", "add", "pdm"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
-    subprocess.run(["pdm", "add", "-dG", "workflow", "pdm"], check=True)
+    subprocess.run(["pdm", "add", "pydantic"], check=True)
     subprocess.run(["pdm", "add", "-dG", "workflow", "pre-commit"], check=True)
     subprocess.run(["pdm", "add", "-dG", "test", "pytest"], check=True)
     subprocess.run(["pdm", "run", "pre-commit", "install"], check=True)
@@ -112,15 +114,15 @@ def main() -> None:
     # Generate .vscode/settings.json
     answer = input("Do you want to generate .vscode/settings.json? [y/n] (y) ") or "y"
     if answer == "y":
-        (CURRENT_PROJECT_PATH / ".vscode").mkdir(exist_ok=True)
-        file = CURRENT_PROJECT_PATH / ".vscode" / "settings.json"
+        (ROOT_DIR / ".vscode").mkdir(exist_ok=True)
+        file = ROOT_DIR / ".vscode" / "settings.json"
         file.touch()
         with open(file, "w", encoding="utf-8") as file:
             file.write(
                 """
 {
-    "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
     "python.autoComplete.extraPaths": ["__pypackages__/3.10/lib"],
@@ -130,11 +132,10 @@ def main() -> None:
                 """
             )
 
-    # Add .pdm.toml to .gitignore
-    with open(CURRENT_PROJECT_PATH / ".gitignore", "r+", encoding="utf-8") as file:
+    # Remove last four lines from .gitignore
+    with open(ROOT_DIR / ".gitignore", "r+", encoding="utf-8") as file:
         contents = file.readlines()
-        index_to_add = contents.index(".pdm-python\n")
-        contents.insert(index_to_add, ".pdm.toml\n")
+        contents = contents[:-4]
         file.seek(0)
         file.writelines(contents)
 
@@ -149,7 +150,7 @@ def main() -> None:
     if answer == "y":
         subprocess.run(["git", "add", "."], check=True)
         subprocess.run(
-            ["git", "commit", "-m", "Initialize using template_setup.py"], check=True
+            ["git", "commit", "-m", "Initialize via template_setup.py"], check=True
         )
         subprocess.run(["git", "push"], check=True)
 
