@@ -14,6 +14,7 @@ FILE_PATHS = USER_REPLACE_PATHS + SRC_PATHS + TESTS_PATHS
 DIR_PATHS = [str(ROOT_DIR / "src" / "template_python")]
 
 OS = "windows-based" if sys.platform.startswith("win") else "unix-based"
+PYTHON_VER = "3.10"
 
 
 def rename_files(
@@ -108,7 +109,7 @@ def main() -> None:
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
     subprocess.run(["pdm", "self", "update"], check=True)
-    subprocess.run(["pdm", "init", "--python", "3.10"], check=True)
+    subprocess.run(["pdm", "init", "--python", PYTHON_VER], check=True)
     subprocess.run(["pdm", "add", "pdm"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
@@ -132,15 +133,15 @@ def main() -> None:
         file.touch()
         with open(file, "w", encoding="utf-8") as file:
             file.write(
-                """
+                f"""
 {
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
-    "python.autoComplete.extraPaths": ["__pypackages__/3.10/lib"],
-    "python.analysis.extraPaths": ["__pypackages__/3.10/lib"],
-    "python.testing.pytestPath": "__pypackages__/3.10/bin/pytest"
+    "python.autoComplete.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
+    "python.analysis.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
+    "python.testing.pytestPath": ".venv/bin/pytest"
 }
                 """
             )
