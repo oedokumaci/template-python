@@ -131,10 +131,8 @@ def main() -> None:
         (ROOT_DIR / ".vscode").mkdir(exist_ok=True)
         file = ROOT_DIR / ".vscode" / "settings.json"
         file.touch()
-        with open(file, "w", encoding="utf-8") as file:
-            file.write(
-                f"""
-{
+        settings = f"""
+{{
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
@@ -142,9 +140,10 @@ def main() -> None:
     "python.autoComplete.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
     "python.analysis.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
     "python.testing.pytestPath": ".venv/bin/pytest"
-}
-                """
-            )
+}}
+"""
+        with open(file, "w", encoding="utf-8") as file:
+            file.write(settings)
 
     # Remove template setup file
     try:
