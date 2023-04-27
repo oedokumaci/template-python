@@ -10,6 +10,12 @@ run:  # Run the project
 help:  # Show project help
 	pdm run python -m template_python --help
 
+test: # Run the tests
+	pdm run pytest tests -v
+
+pre-commit: # Run pre-commit
+	pdm run pre-commit run --all-files
+
 ifeq ($(OS),Windows_NT)
 clean:  # Clean the project
 	if exists .mypy_cache rmdir /s /q .mypy_cache
@@ -22,3 +28,4 @@ clean:  # Clean the project
 	rm -rf .pytest_cache
 	rm -rf src/template_python/__pycache__
 	rm -rf tests/__pycache__
+endif
