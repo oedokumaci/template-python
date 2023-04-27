@@ -10,7 +10,7 @@ USER_REPLACE_PATHS = ["README_main.md"]
 SRC_PATHS = [str(path) for path in (ROOT_DIR / "src").rglob("*.py")]
 TESTS_PATHS = [str(path) for path in (ROOT_DIR / "tests").rglob("*.py")]
 
-FILE_PATHS = USER_REPLACE_PATHS + SRC_PATHS + TESTS_PATHS
+FILE_PATHS = USER_REPLACE_PATHS + SRC_PATHS + TESTS_PATHS + ["Makefile"]
 DIR_PATHS = [str(ROOT_DIR / "src" / "template_python")]
 
 OS = "windows-based" if sys.platform.startswith("win") else "unix-based"

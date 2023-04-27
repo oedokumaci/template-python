@@ -61,6 +61,9 @@ pdm run python -m template_python --help
 
 # Developer Guide
 
+## Makefile
+There is a Makefile in the project directory.
+
 ## Setup
 
 This project is [PDM]-managed, which is compatible with [PEP 621](https://www.python.org/dev/peps/pep-0621) (also compatible with the <i>rejected</i> [PEP 582](https://www.python.org/dev/peps/pep-0582)). If you are a developer, first `pip install pdm` and then `git clone` the project. Next you can `pdm install` in the project directory, which will install all the dependencies in a [virtual environment](https://pdm.fming.dev/latest/usage/venv/).
