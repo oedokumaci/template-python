@@ -1,8 +1,8 @@
 <div align="center">
 
-template-python
-
 <!-- Provide information on your repository here. -->
+
+template-python
 
 <!-- <img src=./style/repo.png width="800"> -->
 
@@ -62,7 +62,9 @@ pdm run python -m template_python --help
 # Developer Guide
 
 ## Makefile
-There is a Makefile in the project directory.
+There is a Makefile in the project directory. You can run `make help` to see the available commands as below. The Makefile is also used in the CI/CD pipeline.
+
+<img src=./style/make.png width="800">
 
 ## Setup
 

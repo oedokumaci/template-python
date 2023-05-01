@@ -1,6 +1,6 @@
 .PHONY: help vscode-settings setup run project-help test pre-commit clean
 
-help:  ## Show this help message for each Makefile recipe.
+help:  ## Show this help message for each Makefile recipe
 ifeq ($(OS),Windows_NT)
 	@findstr /R /C:"^[a-zA-Z0-9 -]\+:.*##" $(MAKEFILE_LIST) | awk -F ':.*##' '{printf "\033[1;32m%-15s\033[0m %s\n", $$1, $$2}' | sort
 else
