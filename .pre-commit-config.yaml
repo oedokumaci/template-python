@@ -59,20 +59,13 @@ repos:
         entry: pdm lock --check
         language: system
         pass_filenames: false
-
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.2.0
-    hooks:
       - id: mypy
-        # exclude: ^tests/
+        name: mypy
         args:
           - src
+        entry: pdm run mypy
+        language: system
         pass_filenames: false
-        additional_dependencies:
-          - types-PyYAML
-
-  - repo: local
-    hooks:
       - id: pytest-check
         name: pytest-check
         entry: pdm run pytest

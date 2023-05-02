@@ -19,6 +19,8 @@ lockfile==0.12.2
 markdown-it-py==2.2.0
 mdurl==0.1.2
 msgpack==1.0.5
+mypy==1.2.0
+mypy-extensions==1.0.0
 nodeenv==1.7.0
 packaging==23.1
 pdm==2.5.3
@@ -40,6 +42,7 @@ shellingham==1.5.0.post1
 tomli==2.0.1
 tomlkit==0.11.7
 typer==0.7.0
+types-PyYAML==6.0.12.9
 typing-extensions==4.5.0
 unearth==0.9.0
 urllib3==1.26.15

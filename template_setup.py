@@ -115,6 +115,8 @@ def main() -> None:
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
     subprocess.run(["pdm", "add", "pydantic"], check=True)
     subprocess.run(["pdm", "add", "-dG", "workflow", "pre-commit"], check=True)
+    subprocess.run(["pdm", "add", "-dG", "workflow", "mypy"], check=True)
+    subprocess.run(["pdm", "add", "-dG", "workflow", "types-PyYAML"], check=True)
     subprocess.run(["pdm", "add", "-dG", "test", "pytest"], check=True)
     subprocess.run(["pdm", "run", "pre-commit", "install"], check=True)
     try:
