@@ -64,7 +64,7 @@ pdm run python -m template_python --help
 ## Makefile
 There is a Makefile in the project directory. You can run `make help` to see the available commands as below. The Makefile is also used in the CI/CD pipeline.
 
-<img src=./style/make.png width="800">
+<img src=./style/make.png width="600">
 
 ## Setup
 
