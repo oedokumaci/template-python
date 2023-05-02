@@ -49,10 +49,10 @@ pre-commit:  ## Run pre-commit
 
 clean:  ## Clean cached files
 ifeq ($(OS),Windows_NT)
-	if exist .mypy_cache rmdir /s /q .mypy_cache
-	if exist .pytest_cache rmdir /s /q .pytest_cache
-	if exist src\template_python\__pycache__ rmdir /s /q src\template_python\__pycache__
-	if exist tests\__pycache__ rmdir /s /q tests\__pycache__
+	if exist ".mypy_cache" rmdir /s /q .mypy_cache
+	if exist ".pytest_cache" rmdir /s /q .pytest_cache
+	if exist "src\template_python\__pycache__" rmdir /s /q src\template_python\__pycache__
+	if exist "tests\__pycache__" rmdir /s /q tests\__pycache__
 else
 	rm -rf .mypy_cache
 	rm -rf .pytest_cache
