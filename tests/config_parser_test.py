@@ -11,11 +11,15 @@ from template_python.config_parser import YAMLConfig
         ("invalid_extension_test.csv", ValueError),
     ],
 )
-def test_parse_yaml_config(log_file_name: str, expected: str | ValueError) -> None:
+def test_parse_yaml_config(
+    yaml_config_instance: YAMLConfig, log_file_name: str, expected: str | ValueError
+) -> None:
     """Test if the YAML config file is parsed and validated correctly."""
+    yaml_config_instance.log_file_name = log_file_name
+
     if isinstance(expected, type) and issubclass(expected, Exception):
         with pytest.raises(expected):
-            YAMLConfig(log_file_name=log_file_name)
+            YAMLConfig(**yaml_config_instance.dict())
     else:
-        config = YAMLConfig(log_file_name=log_file_name)
+        config = YAMLConfig(**yaml_config_instance.dict())
         assert config.log_file_name == expected
