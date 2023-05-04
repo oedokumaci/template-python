@@ -16,7 +16,7 @@ def init_logger(file_name: str) -> None:
     """Initialize the logger.
 
     Args:
-        file_name (str): the name of the log file
+        file_name (str): The name of the log file.
     """
     log_file: Path = LOGS_DIR / file_name
     log_file.unlink(missing_ok=True)
@@ -45,6 +45,11 @@ def init_logger(file_name: str) -> None:
 
 
 def check_log_file_name(log_file_name: str) -> None:
+    """Check if the given log_file_name exists and ask the user whether to overwrite it.
+
+    Args:
+        log_file_name (str): The name of the log file.
+    """
     user_input = (
         input(f"{log_file_name=!r} already exists, overwrite? y/n (n): ") or "n"
     )
@@ -56,13 +61,24 @@ def check_log_file_name(log_file_name: str) -> None:
 
 
 def timer_decorator(func: Callable[P, R]) -> Callable[P, R]:
-    """Decorator that prints the time it took to execute a function."""
+    """Decorator that prints the time it took to execute a function.
+
+    Args:
+        func (Callable[P, R]): The function to be decorated.
+
+    Returns:
+        Callable[P, R]: The decorated function.
+    """
 
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         """Wrapper function that prints the time it took to execute a function.
 
+        Args:
+            *args (P.args): Positional arguments for the function.
+            **kwargs (P.kwargs): Keyword arguments for the function.
+
         Returns:
-            Any: the result of the function
+            R: The result of the function.
         """
         t1: float = time()
         result: R = func(*args, **kwargs)

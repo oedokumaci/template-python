@@ -9,6 +9,7 @@ from template_python.path import LOGS_DIR
 from template_python.utils import check_log_file_name, timer_decorator
 
 
+# Test cases for logging functionality
 @pytest.mark.parametrize(
     "level,msg",
     [
@@ -33,6 +34,7 @@ def test_init_logger(
     assert caplog.record_tuples[-1] == ("root", level, msg)
 
 
+# Test case for check_log_file_name() when user inputs 'y'
 def test_check_log_file_name_overwrite_yes(monkeypatch: MonkeyPatch) -> None:
     """Test if the function allows overwriting when user inputs y."""
     log_file_name = "test.log"
@@ -41,6 +43,7 @@ def test_check_log_file_name_overwrite_yes(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.undo()
 
 
+# Test case for check_log_file_name() when user inputs 'n'
 def test_check_log_file_name_overwrite_no(monkeypatch: MonkeyPatch) -> None:
     """Test if the function raises SystemExit when user inputs n."""
     log_file_name = "test.log"
@@ -50,6 +53,7 @@ def test_check_log_file_name_overwrite_no(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.undo()
 
 
+# Test case for timer_decorator()
 def test_timer_decorator(caplog: Generator[LogCaptureFixture, None, None]) -> None:
     """Test if the timer_decorator function correctly times the execution of a function."""
 

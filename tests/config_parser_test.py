@@ -3,6 +3,7 @@ import pytest
 from template_python.config_parser import YAMLConfig
 
 
+# Test cases for log_file_name validation
 @pytest.mark.parametrize(
     "log_file_name, expected",
     [
