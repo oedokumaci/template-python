@@ -15,6 +15,18 @@ class YAMLConfig(BaseModel):
 
     @validator("log_file_name")
     def log_file_name_must_be_valid(cls, v: str) -> str:
+        """Validator to ensure the log_file_name is valid.
+
+        Args:
+            v (str): log_file_name value.
+
+        Raises:
+            ValueError: If log_file_name starts with /.
+            ValueError: If log_file_name is not a .log or .txt file.
+
+        Returns:
+            str: The validated log_file_name.
+        """
         if v.startswith("/"):
             raise ValueError(
                 f"log_file_name should not start with /, {v!r} starts with /"
@@ -27,7 +39,11 @@ class YAMLConfig(BaseModel):
 
 
 def parse_and_validate_configs() -> YAMLConfig:
-    """Parses and validates the contents of config files in config directory."""
+    """Parses and validates the contents of config files in config directory.
+
+    Returns:
+        YAMLConfig: The validated YAMLConfig object.
+    """
 
     with open(CONFIG_DIR / "config.yaml") as yaml_file:
         yaml_config: dict[str, str] = yaml.safe_load(yaml_file)
