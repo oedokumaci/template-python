@@ -4,4 +4,5 @@ import typer
 
 from template_python.cli import main
 
-typer.run(main)
+if __name__ == "__main__":
+    typer.run(main)
