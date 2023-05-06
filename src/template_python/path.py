@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).parents[2]
+ROOT_DIR: Path = Path(__file__).parents[2].resolve().expanduser()
 
 CONFIG_DIR: Path = ROOT_DIR / "config"
 LOGS_DIR: Path = ROOT_DIR / "logs"
