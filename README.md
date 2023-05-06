@@ -35,8 +35,9 @@ brew install python@3.10
 5. Cd into the repository directory.
 6. Run template_setup.py with
 ```zsh
-python template_setup.py
+python template_setup.py [--user-name YOUR_GIT_USER_NAME] [--user-email YOUR_GIT_USER_EMAIL]
 ```
+7. Follow the instructions in the terminal.
 
 ### Running the setup script will:
  - Rename file contents, names, and directories that contains template repository name with the new repository name
