@@ -18,6 +18,7 @@ def logger_fixture() -> Generator[None, None, None]:
     """Fixture to set up logger for tests."""
     init_logger(pytest_log_file.name)
     yield
+    # Clean up after test
     logger = logging.getLogger()
     for handler in logger.handlers:  # close all handlers, Windows fix
         handler.close()
@@ -53,6 +54,7 @@ def main_with_default_values() -> Generator[Result, None, None]:
 
     result = CliRunner().invoke(app, [pytest_log_file.name])
     yield result
+    # Clean up after test
     logger = logging.getLogger()
     for handler in logger.handlers:  # close all handlers, Windows fix
         handler.close()
@@ -69,6 +71,7 @@ def main_with_custom_values() -> (
 
     result = CliRunner().invoke(app, [pytest_log_file.name, "--override"])
     yield pytest_log_file.name, result
+    # Clean up after test
     logger = logging.getLogger()
     for handler in logger.handlers:  # close all handlers, Windows fix
         handler.close()
@@ -85,8 +88,10 @@ def main_with_existing_log_file(
     (LOGS_DIR / log_file_name).touch()
 
     yield CliRunner(), log_file_name
-
     # Clean up after test
+    logger = logging.getLogger()
+    for handler in logger.handlers:  # close all handlers, Windows fix
+        handler.close()
     (LOGS_DIR / log_file_name).unlink()
 
 
