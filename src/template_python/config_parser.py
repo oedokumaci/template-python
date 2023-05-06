@@ -7,18 +7,21 @@ from template_python.path import CONFIG_DIR
 
 
 class YAMLConfig(BaseModel):
-    """Parses and validates the contents of config.yaml file.
+    """Class that defines the structure and validation rules for the config.yaml file.
+
     Inherits from pydantic BaseModel.
     """
 
+    # Define the fields for the config file
     log_file_name: str
 
+    # Define a validator to ensure the log_file_name is valid
     @validator("log_file_name")
     def log_file_name_must_be_valid(cls, v: str) -> str:
         """Validator to ensure the log_file_name is valid.
 
         Args:
-            v (str): log_file_name value.
+            v (str): The log_file_name value.
 
         Raises:
             ValueError: If log_file_name starts with /.
@@ -39,15 +42,19 @@ class YAMLConfig(BaseModel):
 
 
 def parse_and_validate_configs() -> YAMLConfig:
-    """Parses and validates the contents of config files in config directory.
+    """Parse and validate the contents of the config.yaml file.
 
     Returns:
         YAMLConfig: The validated YAMLConfig object.
     """
 
     with open(CONFIG_DIR / "config.yaml") as yaml_file:
+        # Load the contents of the yaml file into a dictionary
         yaml_config: dict[str, str] = yaml.safe_load(yaml_file)
+
+    # Create a YAMLConfig object from the dictionary
     return YAMLConfig(**yaml_config)
 
 
+# Parse and validate the config files at import time
 YAML_CONFIG = parse_and_validate_configs()

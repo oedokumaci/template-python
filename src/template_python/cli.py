@@ -36,4 +36,5 @@ def main(
     print("")
     print(f"logs are saved to {log_file.resolve()}")
 
+    # Exit the program
     raise typer.Exit()
