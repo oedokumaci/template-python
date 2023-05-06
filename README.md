@@ -41,7 +41,6 @@ python template_setup.py [--user-name YOUR_GIT_USER_NAME] [--user-email YOUR_GIT
 
 ### Running the setup script will:
  - Rename file contents, names, and directories that contains template repository name with the new repository name
- - Prompt user for GitHub user name and user email
  - Rename user name and user email in and `README_main.md`
  - Configure GitHub user name and user email locally
  - Remove `pdm.lock`, `pyproject.toml`, and `requirements.txt`
