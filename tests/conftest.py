@@ -5,7 +5,7 @@ from typing import Generator
 import pytest
 from typer.testing import CliRunner, Result
 
-from template_python.config_parser import YAMLConfig
+from template_python.config_parser import YAMLConfig, YAMLConfigDict
 from template_python.path import CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR, ROOT_DIR
 from template_python.utils import init_logger
 
@@ -33,7 +33,10 @@ def yaml_config_instance() -> YAMLConfig:
     Returns:
         YAMLConfig: The YAMLConfig instance to use for testing.
     """
-    return YAMLConfig(log_file_name="valid.log")
+    config: YAMLConfigDict = {
+        "log_file_name": "valid.log",
+    }
+    return YAMLConfig(**config)
 
 
 # Fixture for paths

@@ -1,4 +1,7 @@
 """This module parses and validates the config files in config directory."""
+from __future__ import annotations
+
+from typing import TypedDict
 
 import yaml
 from pydantic import BaseModel, validator
@@ -41,6 +44,10 @@ class YAMLConfig(BaseModel):
         return v
 
 
+class YAMLConfigDict(TypedDict):
+    log_file_name: str
+
+
 def parse_and_validate_configs() -> YAMLConfig:
     """Parse and validate the contents of the config.yaml file.
 
@@ -50,7 +57,7 @@ def parse_and_validate_configs() -> YAMLConfig:
 
     with open(CONFIG_DIR / "config.yaml") as yaml_file:
         # Load the contents of the yaml file into a dictionary
-        yaml_config: dict[str, str] = yaml.safe_load(yaml_file)
+        yaml_config: YAMLConfigDict = yaml.safe_load(yaml_file)
 
     # Create a YAMLConfig object from the dictionary
     return YAMLConfig(**yaml_config)
