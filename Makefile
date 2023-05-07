@@ -49,11 +49,13 @@ pre-commit:  ## Run pre-commit
 
 clean:  ## Clean cached files
 ifeq ($(OS),Windows_NT)
+	del /q logs\pytest_test.log || true
 	rmdir /s /q .mypy_cache || true
 	rmdir /s /q .pytest_cache || true
 	rmdir /s /q src\template_python\__pycache__ || true
 	rmdir /s /q tests\__pycache__ || true
 else
+	rm -f logs/pytest_test.log
 	rm -rf .mypy_cache
 	rm -rf .pytest_cache
 	rm -rf src/template_python/__pycache__

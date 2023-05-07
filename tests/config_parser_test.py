@@ -4,7 +4,14 @@ from template_python.config_parser import YAMLConfig
 
 
 def test_yaml_config_instance(yaml_config_instance: YAMLConfig) -> None:
-    """Test if a YAMLConfig instance is created correctly."""
+    """Test if a YAMLConfig instance is created correctly.
+
+    Args:
+        yaml_config_instance (YAMLConfig): A YAMLConfig instance to test.
+
+    Returns:
+        None
+    """
     assert yaml_config_instance is not None
     assert isinstance(yaml_config_instance, YAMLConfig)
     assert yaml_config_instance.log_file_name.endswith((".log", ".txt"))
@@ -21,7 +28,16 @@ def test_yaml_config_instance(yaml_config_instance: YAMLConfig) -> None:
 def test_log_file_name_validation(
     yaml_config_instance: YAMLConfig, log_file_name: str, expected: str | ValueError
 ) -> None:
-    """Test if log_file_name is validated correctly."""
+    """Test if log_file_name is validated correctly.
+
+    Args:
+        yaml_config_instance (YAMLConfig): A YAMLConfig instance to test.
+        log_file_name (str): The log file name to validate.
+        expected (str | ValueError): The expected result of the validation.
+
+    Returns:
+        None
+    """
     yaml_config_instance.log_file_name = log_file_name
 
     if isinstance(expected, type) and issubclass(expected, Exception):

@@ -26,6 +26,11 @@ def test_init_logger(
 ) -> None:
     """Test if the logger object is initialized and produces the correct log messages.
 
+    This test function checks if the logger object is initialized correctly and if it
+    produces the correct log messages. The function takes the logger_fixture, which sets
+    up the logger, the caplog fixture, which is used to capture the log messages, the
+    logging level, and the log message.
+
     Args:
         logger_fixture (Generator[None, None, None]): The logger fixture.
         caplog (LogCaptureFixture): The fixture to capture log messages.
@@ -33,14 +38,16 @@ def test_init_logger(
         msg (str): The log message.
 
     Returns:
-        None: The function does not return a value.
+        None
     """
     logger_fixture
-    logging.log(level, msg)
 
     # Assert that the log file was created in the correct directory
     log_file_path = LOGS_DIR / "pytest_test.log"
     assert log_file_path.is_file()
+
+    # Log a message at the specified level
+    logging.log(level, msg)
 
     # Assert that the correct logs were produced
     assert caplog.record_tuples[-1] == ("root", level, msg)
@@ -49,11 +56,15 @@ def test_init_logger(
 def test_check_log_file_name_overwrite_yes(monkeypatch: MonkeyPatch) -> None:
     """Test if the function allows overwriting when user inputs y.
 
+    This test function checks if the check_log_file_name function correctly allows
+    overwriting when the user inputs y. The function takes the monkeypatch fixture,
+    which is used to monkeypatch the input function.
+
     Args:
         monkeypatch (MonkeyPatch): The monkeypatch fixture.
 
     Returns:
-        None: The function does not return a value.
+        None
     """
     log_file_name = "test.log"
     monkeypatch.setattr("builtins.input", lambda _: "y")
@@ -64,11 +75,15 @@ def test_check_log_file_name_overwrite_yes(monkeypatch: MonkeyPatch) -> None:
 def test_check_log_file_name_overwrite_no(monkeypatch: MonkeyPatch) -> None:
     """Test if the function raises SystemExit when user inputs n.
 
+    This test function checks if the check_log_file_name function correctly raises
+    SystemExit when the user inputs n. The function takes the monkeypatch fixture,
+    which is used to monkeypatch the input function.
+
     Args:
         monkeypatch (MonkeyPatch): The monkeypatch fixture.
 
     Returns:
-        None: The function does not return a value.
+        None
     """
     log_file_name = "test.log"
     monkeypatch.setattr("builtins.input", lambda _: "n")
@@ -77,14 +92,21 @@ def test_check_log_file_name_overwrite_no(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.undo()
 
 
-def test_timer_decorator(caplog: LogCaptureFixture) -> None:
+def test_timer_decorator(
+    caplog: LogCaptureFixture, cleanup: Generator[None, None, None]
+) -> None:
     """Test if the timer_decorator function correctly times the execution of a function.
+
+    This test function checks if the timer_decorator function correctly times the
+    execution of a function. The function takes the caplog fixture, which is used to
+    capture the log messages, and the cleanup fixture to handle cleanup process for the logger.
 
     Args:
         caplog (LogCaptureFixture): The fixture to capture log messages.
+        cleanup (Generator[None, None, None]): The fixture to handle cleanup process for the logger.
 
     Returns:
-        None: The function does not return a value.
+        None
     """
 
     # Define a test function that takes some time to execute
