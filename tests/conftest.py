@@ -48,6 +48,9 @@ def yaml_config_instance() -> YAMLConfig:
 
     This fixture creates a YAMLConfigDict and uses it to initialize the YAMLConfig
     instance. The fixture is used to provide a YAMLConfig instance to the test functions.
+
+    Returns:
+        YAMLConfig: The YAMLConfig instance to use for testing.
     """
     config: YAMLConfigDict = {
         "log_file_name": "valid.log",
