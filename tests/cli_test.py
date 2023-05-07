@@ -19,7 +19,9 @@ def test_main_with_custom_values(main_with_custom_values: Result) -> None:
     assert log_file_path.exists()
 
 
-@pytest.mark.parametrize("main_with_existing_log_file", ["existing.log"], indirect=True)
+@pytest.mark.parametrize(
+    "main_with_existing_log_file", ["pytest_test.log"], indirect=True
+)
 def test_main_with_existing_log_file_without_override(
     main_with_existing_log_file: Result,
 ) -> None:
@@ -31,7 +33,9 @@ def test_main_with_existing_log_file_without_override(
     assert log_file_path.exists()
 
 
-@pytest.mark.parametrize("main_with_existing_log_file", ["existing.log"], indirect=True)
+@pytest.mark.parametrize(
+    "main_with_existing_log_file", ["pytest_test.log"], indirect=True
+)
 def test_main_with_existing_log_file_with_override(
     main_with_existing_log_file: Result,
 ) -> None:
