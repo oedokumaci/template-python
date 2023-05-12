@@ -99,7 +99,7 @@ def timer_decorator(func: Callable[P, R]) -> Callable[P, R]:
 
         # Log the execution time and return the result of the function
         logging.info(
-            f"Method {func.__name__!r} of module {func.__module__!r} executed in {elapsed_time:.4f} seconds."
+            f"Method {func.__name__!r} of module {func.__module__!r} executed in {elapsed_time:.4f} seconds"
         )
         return result
 
