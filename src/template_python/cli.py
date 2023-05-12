@@ -2,7 +2,7 @@
 
 import typer
 
-from template_python.config_parser import YAML_CONFIG
+from template_python.config import YAML_CONFIG
 from template_python.path import LOGS_DIR
 from template_python.utils import check_log_file_name, init_logger
 

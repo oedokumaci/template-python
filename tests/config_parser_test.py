@@ -1,6 +1,8 @@
+from typing import Type
+
 import pytest
 
-from template_python.config_parser import YAMLConfig
+from template_python.config import YAMLConfig
 
 
 def test_yaml_config_instance(yaml_config_instance: YAMLConfig) -> None:
@@ -26,21 +28,23 @@ def test_yaml_config_instance(yaml_config_instance: YAMLConfig) -> None:
     ],
 )
 def test_log_file_name_validation(
-    yaml_config_instance: YAMLConfig, log_file_name: str, expected: str | ValueError
+    yaml_config_instance: YAMLConfig,
+    log_file_name: str,
+    expected: str | Type[Exception],
 ) -> None:
     """Test if log_file_name is validated correctly.
 
     Args:
         yaml_config_instance (YAMLConfig): A YAMLConfig instance to test.
         log_file_name (str): The log file name to validate.
-        expected (str | ValueError): The expected result of the validation.
+        expected (str | Type[Exception]): The expected result of the validation.
 
     Returns:
         None
     """
     yaml_config_instance.log_file_name = log_file_name
 
-    if isinstance(expected, type) and issubclass(expected, Exception):
+    if not isinstance(expected, str):
         with pytest.raises(expected):
             YAMLConfig(**yaml_config_instance.dict())
     else:

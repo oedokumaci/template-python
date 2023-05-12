@@ -5,7 +5,7 @@ from typing import Generator
 import pytest
 from typer.testing import CliRunner, Result
 
-from template_python.config_parser import YAMLConfig, YAMLConfigDict
+from template_python.config import YAMLConfig, YAMLConfigDict
 from template_python.path import CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR, ROOT_DIR
 from template_python.utils import init_logger
 
@@ -94,7 +94,7 @@ def main_with_default_values(
 @pytest.fixture(params=["--no-override", "--override"], ids=["no_override", "override"])
 def main_with_existing_log_file(
     request: pytest.FixtureRequest, cleanup: Generator[None, None, None]
-) -> tuple[Generator[Result, None, None], Generator[str, None, None]]:
+) -> Generator[tuple[Result, str], None, None]:
     """A fixture that invokes the main function with an existing log file.
 
     This fixture creates an empty log file in the logs directory and then invokes
