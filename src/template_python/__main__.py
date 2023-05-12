@@ -1,8 +1,6 @@
 """Entry-point module, in case of using `python -m template_python`."""
 
-import typer
-
-from template_python.cli import main
+from template_python.cli import app
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
