@@ -19,26 +19,26 @@ PYTHON_VER = "3.10"
 
 
 def rename_files(
-    old_word: str, new_word: str, file_paths: list[str], dir_paths: list[str]
+    old_word: str, new_word: str, files: list[str], dirs: list[str]
 ) -> None:
     """Renames files and directories.
 
     Args:
         old_word (str)
         new_word (str)
-        file_paths (list[str])
-        dir_paths (list[str])
+        files (list[str])
+        dirs (list[str])
     """
-    file_paths = [ROOT_DIR / path for path in file_paths]
-    dir_paths = [ROOT_DIR / path for path in dir_paths]
+    file_paths = [ROOT_DIR / path for path in files]
+    dir_paths = [ROOT_DIR / path for path in dirs]
 
     for path in file_paths:
-        with open(path, encoding="utf-8") as file:
-            contents = file.read()
+        with open(path, encoding="utf-8") as f:
+            contents = f.read()
         new_contents = contents.replace(old_word, new_word)
 
-        with open(path, "w", encoding="utf-8") as file:
-            file.write(new_contents)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(new_contents)
 
         new_path = path.with_name(path.name.replace(old_word, new_word))
         path.rename(new_path)
@@ -77,8 +77,8 @@ def generate_vscode_settings() -> None:
     "python.testing.pytestPath": ".venv/bin/pytest"
 }}
 """
-        with open(file, "w", encoding="utf-8") as file:
-            file.write(settings)
+        with open(file, "w", encoding="utf-8") as f:
+            f.write(settings)
 
 
 def remove_pdm_files() -> None:
@@ -103,13 +103,7 @@ def add_dependencies_using_pdm() -> None:
             subprocess.run(["pip3", "install", "pdm"], check=True)
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
-    subprocess.run(
-        ["pdm", "self", "add", "urllib3<2.0"], check=True
-    )  # see https://github.com/pdm-project/pdm/issues/1894
-    subprocess.run(["pdm", "init", "--python", PYTHON_VER], check=True)
-    subprocess.run(
-        ["pdm", "add", "urllib3<2.0"], check=True
-    )  # see https://github.com/pdm-project/pdm/issues/1894
+    subprocess.run(["pdm", "self", "update"], check=True)
     subprocess.run(["pdm", "add", "pdm"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
@@ -146,7 +140,7 @@ def remove_cached_files() -> None:
         pass
 
 
-def main() -> None:
+def main() -> int:
     """Main function that sets up the project."""
     parser = argparse.ArgumentParser(
         description="Does the magic to set up your project."
@@ -224,6 +218,7 @@ def main() -> None:
     remove_cached_files()
 
     print("Setup complete!")
+    return 0
 
 
 if __name__ == "__main__":
