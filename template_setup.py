@@ -104,6 +104,7 @@ def add_dependencies_using_pdm() -> None:
         except subprocess.CalledProcessError:
             subprocess.run(["pip", "install", "pdm"], check=True)
     subprocess.run(["pdm", "self", "update"], check=True)
+    subprocess.run(["pdm", "init", "--python", PYTHON_VER], check=True)
     subprocess.run(["pdm", "add", "pdm"], check=True)
     subprocess.run(["pdm", "add", "typer"], check=True)
     subprocess.run(["pdm", "add", "pyyaml"], check=True)
