@@ -19,6 +19,24 @@ template-python
 
 &nbsp;
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [User Guide](#user-guide)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Configuration](#configuration)
+    - [Quick Start](#quick-start)
+    - [Detailed Usage](#detailed-usage)
+- [Developer Guide](#developer-guide)
+  - [Makefile](#makefile)
+  - [Setup](#setup)
+  - [Development](#development)
+    - [Pre-commit Hooks](#pre-commit-hooks)
+
+&nbsp;
+
 # User Guide
 
 ## Requirements
