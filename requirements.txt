@@ -26,7 +26,7 @@ packaging==23.1
 pdm==2.6.1
 platformdirs==3.5.1
 pluggy==1.0.0
-pre-commit==3.3.1
+pre-commit==3.3.2
 pydantic==1.10.7
 pygments==2.15.1
 pyproject-hooks==1.0.0
@@ -37,7 +37,7 @@ requests==2.30.0
 requests-toolbelt==1.0.0
 resolvelib==1.0.1
 rich==13.3.5
-setuptools==67.7.2
+setuptools==67.8.0
 shellingham==1.5.0.post1
 tomli==2.0.1
 tomlkit==0.11.8
