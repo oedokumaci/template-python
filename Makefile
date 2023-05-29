@@ -10,6 +10,7 @@ endif
 setup:  ## Setup project
 	pdm install
 	pdm run pre-commit install
+	make test
 
 vscode-settings:  ## Generate VSCode settings file
 	@mkdir -p .vscode
