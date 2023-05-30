@@ -54,6 +54,8 @@ repos:
         additional_dependencies:
           - types-PyYAML
           - pytest
+          - typer
+          - pydantic
 
   - repo: local
     hooks:
