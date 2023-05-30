@@ -39,7 +39,6 @@ shellingham==1.5.0.post1
 tomli==2.0.1
 tomlkit==0.11.8
 typer==0.9.0
-types-PyYAML==6.0.12.10
 typing-extensions==4.5.0
 unearth==0.9.1
 urllib3==2.0.2

@@ -317,11 +317,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "types-pyyaml"
-version = "6.0.12.10"
-summary = "Typing stubs for PyYAML"
-
-[[package]]
 name = "typing-extensions"
 version = "4.5.0"
 requires_python = ">=3.7"
@@ -358,7 +353,7 @@ dependencies = [
 lock_version = "4.2"
 cross_platform = true
 groups = ["default", "test", "workflow"]
-content_hash = "sha256:8257963e01033db6b93d651a01551630b9ebf696829a77d917ed9327dbb306c7"
+content_hash = "sha256:1b4364d73ca9512a9c3b34318e742f23699c4442b0f3246d808d43235d196655"
 
 [metadata.files]
 "blinker 1.6.2" = [
@@ -722,10 +717,6 @@ content_hash = "sha256:8257963e01033db6b93d651a01551630b9ebf696829a77d917ed9327d
 "typer 0.9.0" = [
     {url = "https://files.pythonhosted.org/packages/5b/49/39f10d0f75886439ab3dac889f14f8ad511982a754e382c9b6ca895b29e9/typer-0.9.0.tar.gz", hash = "sha256:50922fd79aea2f4751a8e0408ff10d2662bd0c8bbfa84755a699f3bada2978b2"},
     {url = "https://files.pythonhosted.org/packages/bf/0e/c68adf10adda05f28a6ed7b9f4cd7b8e07f641b44af88ba72d9c89e4de7a/typer-0.9.0-py3-none-any.whl", hash = "sha256:5d96d986a21493606a358cae4461bd8cdf83cbf33a5aa950ae629ca3b51467ee"},
-]
-"types-pyyaml 6.0.12.10" = [
-    {url = "https://files.pythonhosted.org/packages/0a/06/4c384009ff044ce9c439c69abe4498f7caf2155f69cc699073d4fce84a91/types_PyYAML-6.0.12.10-py3-none-any.whl", hash = "sha256:662fa444963eff9b68120d70cda1af5a5f2aa57900003c2006d7626450eaae5f"},
-    {url = "https://files.pythonhosted.org/packages/1e/1f/b94c24cd38507a94efb8bd95682a27fbcda543e5afbd11a018305f552a11/types-PyYAML-6.0.12.10.tar.gz", hash = "sha256:ebab3d0700b946553724ae6ca636ea932c1b0868701d4af121630e78d695fc97"},
 ]
 "typing-extensions 4.5.0" = [
     {url = "https://files.pythonhosted.org/packages/31/25/5abcd82372d3d4a3932e1fa8c3dbf9efac10cc7c0d16e78467460571b404/typing_extensions-4.5.0-py3-none-any.whl", hash = "sha256:fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4"},

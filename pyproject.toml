@@ -2,7 +2,6 @@
 [tool.pdm.dev-dependencies]
 workflow = [
     "pre-commit>=3.2.2",
-    "types-PyYAML>=6.0.12.9",
 ]
 test = [
     "pytest>=7.3.1",

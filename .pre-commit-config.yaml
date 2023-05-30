@@ -51,6 +51,9 @@ repos:
           - src
           - tests
         pass_filenames: false
+        additional_dependencies:
+          - types-PyYAML
+          - pytest
 
   - repo: local
     hooks:
