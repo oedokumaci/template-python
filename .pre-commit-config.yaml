@@ -42,6 +42,15 @@ repos:
     rev: v3.3.2
     hooks:
       - id: pyupgrade
+  
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.3.0
+    hooks:
+      - id: mypy
+        args:
+          - src
+          - tests
+        pass_filenames: false
 
   - repo: local
     hooks:
@@ -57,19 +66,6 @@ repos:
       - id: pdm-lock-check
         name: pdm-lock-check
         entry: pdm lock --check
-        language: system
-        pass_filenames: false
-      - id: mypy
-        name: mypy
-        entry: |
-          bash -c "
-          if git diff --name-only --cached --diff-filter=ACM | grep -q '\.py$'; then
-            pdm run mypy $(git diff --name-only --cached --diff-filter=ACM | grep '\.py$');
-          elif git diff --name-only --cached --diff-filter=ACM | grep -q . ; then
-            echo 'No staged .py files, skipping...';
-          else
-            find src -name '*.py' -exec pdm run mypy {} +;
-          fi"
         language: system
         pass_filenames: false
       - id: pytest-check
