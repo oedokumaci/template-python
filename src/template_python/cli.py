@@ -2,34 +2,31 @@
 
 import typer
 
-from template_python.config import YAML_CONFIG
 from template_python.path import LOGS_DIR
-from template_python.utils import check_log_file_name, init_logger
+from template_python.utils import init_logger
 
 app = typer.Typer()
 
 # Define command line arguments and options
-log_file_name_argument = typer.Argument(
-    YAML_CONFIG.log_file_name,
-    help="Name of the log file. Default can be changed in config.yaml.",
-)
-override_option = typer.Option(False, help="Override the log file if it exists.")
+log_option = typer.Option(True, help="Whether to enable logging.")
 
 
 @app.command()
-def main(
-    log_file_name: str = log_file_name_argument, override: bool = override_option
-) -> None:
+def main(log: bool = log_option) -> None:
     """CLI for template-python."""
 
-    # Check if log file exists, if so ask to overwrite
-    log_file = LOGS_DIR / log_file_name
-    if not override and log_file.exists():
-        check_log_file_name(log_file_name)
-
-    # Initialize logger
-    init_logger(log_file_name)
+    if log:
+        # Check if log file exists, if so ask to overwrite
+        log_file_name: str = typer.prompt("Enter log file name", default="logs.log")
+        log_file = LOGS_DIR / log_file_name
+        if log_file.exists():
+            overwrite = typer.confirm("Log file already exists, overwrite?")
+            if not overwrite:
+                typer.echo("Exiting...")
+                raise typer.Exit()
+        # Initialize logger
+        init_logger(log_file_name)
 
     # Print log file path
-    print("")
-    print(f"logs are saved to {log_file.resolve()}")
+    typer.echo("All done!")
+    typer.echo(f"Logs are saved to {log_file.resolve()}")

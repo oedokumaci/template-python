@@ -51,23 +51,6 @@ def init_logger(file_name: str) -> None:
     logging.info(f"Path to log file: {log_file.resolve()}")
 
 
-# Define function to check if a log file already exists and ask user whether to overwrite it
-def check_log_file_name(log_file_name: str) -> None:
-    """Check if the given log_file_name exists and ask the user whether to overwrite it.
-
-    Args:
-        log_file_name (str): The name of the log file.
-    """
-    user_input = (
-        input(f"{log_file_name=!r} already exists, overwrite? y/n (n): ") or "n"
-    )
-    if user_input != "y":
-        raise SystemExit(
-            "exiting not to overwrite, please use a different log_file_name"
-        )
-    print("")
-
-
 # Define a decorator function to print the execution time of a function
 def timer_decorator(func: Callable[P, R]) -> Callable[P, R]:
     """Decorator that prints the time it took to execute a function.

@@ -37,7 +37,7 @@ else
 endif
 
 run:  ## Run project
-	pdm run python -m template_python main
+	pdm run python -m template_python
 
 project-help:  ## Show project help
 	pdm run python -m template_python --help
