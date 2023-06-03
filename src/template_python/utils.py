@@ -1,10 +1,12 @@
 """Module for utility functions."""
 
 import logging
-import sys
+from datetime import datetime
 from pathlib import Path
 from time import time
 from typing import Callable, ParamSpec, TypeVar
+
+from rich.logging import RichHandler
 
 from template_python.path import LOGS_DIR
 
@@ -14,41 +16,45 @@ P = ParamSpec("P")
 
 
 # Define function to initialize the logger
-def init_logger(file_name: str) -> None:
+def init_logger(log_to_file: bool = True) -> None:
     """Initialize the logger.
 
     Args:
         file_name (str): The name of the log file.
     """
-    # Set the log file path and delete the file if it already exists
-    log_file: Path = LOGS_DIR / file_name
-    log_file.unlink(missing_ok=True)
-    log_file.touch()
+    if log_to_file:
+        # Set the log file path and create it if it does not exist
+        log_file_name: str = f"logs_{datetime.now().strftime('%Y-%m-%d')}.log"
+        log_file: Path = LOGS_DIR / log_file_name
+        log_file.touch(exist_ok=True)
 
-    # Set the log formatter and handler levels
-    log_formatter = logging.Formatter("%(asctime)s:%(levelname)s: %(message)s")
-    log_formatter.datefmt = "%Y-%m-%d %H:%M:%S"
+        # Set the log formatter and handler levels for the log file
+        log_formatter = logging.Formatter("%(asctime)s:%(levelname)s: %(message)s")
+        log_formatter.datefmt = "%Y-%m-%d %H:%M:%S"
+        log_handler = logging.FileHandler(str(log_file))
+        log_handler.setFormatter(log_formatter)
+        log_handler.setLevel(logging.INFO)
 
-    log_handler = logging.FileHandler(str(log_file))
-    log_handler.setFormatter(log_formatter)
-    log_handler.setLevel(logging.INFO)
+    # Set the log formatter and handler levels for the standard output
+    std_log_formatter = logging.Formatter("%(message)s")
+    std_log_formatter.datefmt = "%H:%M:%S"
+    std_log_handler = RichHandler()
+    std_log_handler.setFormatter(std_log_formatter)
 
-    std_log_handler = logging.StreamHandler(sys.stdout)
-    std_log_handler.setFormatter(log_formatter)
-    std_log_handler.setLevel(logging.DEBUG)
-
-    # Add handlers to the logger and set logging level
+    # Add handlers to the logger and set the logging level
     logger = logging.getLogger()
+    if log_to_file:
+        logger.addHandler(log_handler)
     logger.addHandler(std_log_handler)
-    logger.addHandler(log_handler)
     logger.setLevel(logging.DEBUG)
 
     # Set library logging level to error
     for key in logging.Logger.manager.loggerDict:
         logging.getLogger(key).setLevel(logging.ERROR)
 
-    # Print path to log file
-    logging.info(f"Path to log file: {log_file.resolve()}")
+    if log_to_file:
+        # Log the path to log file
+        logging.info(f"Path to log file: {log_file.resolve()}")
 
 
 # Define a decorator function to print the execution time of a function
