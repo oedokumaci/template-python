@@ -52,10 +52,11 @@ repos:
           - tests
         pass_filenames: false
         additional_dependencies:
-          - types-PyYAML
-          - pytest
-          - typer
           - pydantic
+          - pytest
+          - rich
+          - typer
+          - types-PyYAML
 
   - repo: local
     hooks:
