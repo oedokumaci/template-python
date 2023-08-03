@@ -1,4 +1,4 @@
-.PHONY: help vscode-settings setup run project-help test pre-commit clean
+.PHONY: help vscode-settings setup update-dev update-user run project-help test pre-commit clean
 
 help:  ## Show this help message for each Makefile recipe
 ifeq ($(OS),Windows_NT)
@@ -10,6 +10,16 @@ endif
 setup:  ## Setup project
 	pdm install
 	pdm run pre-commit install
+	make test
+
+update-dev:  ## Update project dependencies for development
+	pdm update
+	pdm run pre-commit autoupdate
+	make test
+
+update-user:  ## Download latest project version and dependencies for user
+	git pull
+	pdm sync
 	make test
 
 vscode-settings:  ## Generate VSCode settings file
