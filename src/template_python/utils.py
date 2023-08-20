@@ -4,15 +4,12 @@ import logging
 from datetime import datetime
 from pathlib import Path
 from time import time
-from typing import Callable, ParamSpec, TypeVar
+from typing import Callable
 
 from rich.logging import RichHandler
 
+from template_python.constant import P, R
 from template_python.path import LOGS_DIR
-
-# Define TypeVars and ParamSpecs
-R = TypeVar("R")
-P = ParamSpec("P")
 
 
 # Define function to initialize the logger

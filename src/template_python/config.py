@@ -1,4 +1,5 @@
 """This module parses and validates the config files in config directory."""
+
 from __future__ import annotations
 
 from typing import TypedDict
