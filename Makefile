@@ -52,10 +52,10 @@ run:  ## Run project
 project-help:  ## Show project help
 	pdm run python -m template_python --help
 
-test: clean  ## Run tests
+test:  ## Run tests
 	pdm run pytest tests -v
 
-pre-commit:  ## Run pre-commit
+pre-commit: clean  ## Run pre-commit
 	pdm run pre-commit run --all-files
 
 clean:  ## Clean cached files
