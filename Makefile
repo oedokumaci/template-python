@@ -26,20 +26,14 @@ vscode-settings:  ## Generate VSCode settings file
 	@mkdir -p .vscode
 ifeq ($(OS),Windows_NT)
 	@echo { > .vscode/settings.json
-	@echo "    \"python.linting.enabled\": true," >> .vscode/settings.json
-	@echo "    \"python.linting.pylintEnabled\": false," >> .vscode/settings.json
-	@echo "    \"python.linting.flake8Enabled\": true," >> .vscode/settings.json
-	@echo "    \"python.linting.flake8Args\": [\"--max-line-length=88\", \"--select=C,E,F,W,B\", \"--extend-ignore=B009,E203,E501,W503\"]," >> .vscode/settings.json
+	@echo "    \"flake8.args\": [\"--max-line-length=88\", \"--select=C,E,F,W,B\", \"--extend-ignore=B009,E203,E501,W503\"]," >> .vscode/settings.json
 	@echo "    \"python.autoComplete.extraPaths\": [\".venv/Lib/site-packages\"]," >> .vscode/settings.json
 	@echo "    \"python.analysis.extraPaths\": [\".venv/Lib/site-packages\"]," >> .vscode/settings.json
 	@echo "    \"python.testing.pytestPath\": \".venv/Scripts/pytest\"" >> .vscode/settings.json
 	@echo } >> .vscode/settings.json
 else
 	@echo '{' > .vscode/settings.json
-	@echo '    "python.linting.enabled": true,' >> .vscode/settings.json
-	@echo '    "python.linting.pylintEnabled": false,' >> .vscode/settings.json
-	@echo '    "python.linting.flake8Enabled": true,' >> .vscode/settings.json
-	@echo '    "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],' >> .vscode/settings.json
+	@echo '    "flake8.args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],' >> .vscode/settings.json
 	@echo '    "python.autoComplete.extraPaths": [".venv/lib/python$${env:PYTHON_VER}/site-packages"],' >> .vscode/settings.json
 	@echo '    "python.analysis.extraPaths": [".venv/lib/python$${env:PYTHON_VER}/site-packages"],' >> .vscode/settings.json
 	@echo '    "python.testing.pytestPath": ".venv/bin/pytest"' >> .vscode/settings.json
