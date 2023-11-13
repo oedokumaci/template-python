@@ -1,11 +1,11 @@
 repos:
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.11.0
     hooks:
       - id: black
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         args:
@@ -24,7 +24,7 @@ repos:
           - --profile=black # to be compatible with black
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: end-of-file-fixer
       - id: check-yaml
@@ -33,18 +33,19 @@ repos:
       - id: requirements-txt-fixer
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.4
+    rev: v2.2.6
     hooks:
       - id: codespell
         exclude: ^config/
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.2
+    rev: v3.15.0
     hooks:
       - id: pyupgrade
+        args: [--py310-plus]
   
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.3.0
+    rev: v1.7.0
     hooks:
       - id: mypy
         args:
@@ -57,6 +58,16 @@ repos:
           - rich
           - typer
           - types-PyYAML
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.7.0
+    hooks:
+      - id: nbqa-black
+        # additional_dependencies: [jupytext]  # optional, only if you're using Jupytext
+      - id: nbqa-pyupgrade
+        args: [--py310-plus]
+      - id: nbqa-isort
+        args: [--float-to-top, --profile=black]
 
   - repo: local
     hooks:

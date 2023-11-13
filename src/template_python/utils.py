@@ -1,10 +1,10 @@
 """Module for utility functions."""
 
 import logging
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
 from time import time
-from typing import Callable
 
 from rich.logging import RichHandler
 
