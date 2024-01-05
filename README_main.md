@@ -25,6 +25,9 @@ template-python
 - [User Guide](#user-guide)
   - [Requirements](#requirements)
   - [Installation](#installation)
+    - [Using Docker](#using-docker)
+    - [Download Zip File](#download-zip-file)
+    - [Using Git](#using-git)
   - [Usage](#usage)
     - [Configuration](#configuration)
     - [Quick Start](#quick-start)
@@ -46,7 +49,30 @@ template-python
 
 ## Installation
 
-Pip installing the package from PyPI is not yet available. Instead, download [from this link](https://github.com/oedokumaci/template-python/archive/refs/heads/main.zip) and unzip. You will also need to change the folder name from template-python-main to template-python (or cd into template-python-main in step 2 below). Alternatively, if you have git installed, simply run 
+There are three easy ways to install the package.
+
+### Using Docker
+
+The easiest way to run the project is to use Docker. First, install [Docker](https://docs.docker.com/get-docker/). Then, run the following command in the project directory.
+```bash
+docker build -t template-python .
+```
+This will build the Docker image. After the image is built, the following are some examples of how to run the project.
+
+```bash
+docker run --rm -it -v "PATH_TO_YOUR_CONFIG.yaml:/usr/src/app/config/config.yaml" -e environment_variable=ENVIRONMENT_VARIABLE template-python
+```
+
+These commands will run the project with the specified config file and cli arguments. The output can be seen in the terminal. The `-v` option mounts the specified config file to the container. The `-e` option sets the environment variable to the specified value. The `--rm` option removes the container after it exits. You can also not use the `--rm` option to keep the container after it exits and see the logs. The `-it` option is for interactive mode.
+
+
+### Download Zip File
+
+Pip installing the package from PyPI is not yet available. Instead, download [from this link](https://github.com/oedokumaci/template-python/archive/refs/heads/main.zip) and unzip. You will also need to change the folder name from template-python-main to template-python (or cd into template-python-main in step 2 below). 
+
+### Using Git
+
+If you have git installed, simply run 
 ```bash
 git clone https://github.com/oedokumaci/template-python
 ```
@@ -55,7 +81,7 @@ to install the package locally. After downloading, here are the steps to install
 1. `pip install pdm`
 2. `cd template-python`
 3. `pdm install --prod`
-
+   
 ## Usage
 
 ### Configuration
