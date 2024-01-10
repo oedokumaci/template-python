@@ -23,7 +23,7 @@ class YAMLConfigDict(TypedDict):
     """Type definition for the YAMLConfig dictionary."""
 
 
-def parse_and_validate_configs() -> YAMLConfig:
+def parse_and_validate_configs() -> YAMLConfig | None:
     """Parse and validate the contents of the config.yaml file.
 
     Returns:
@@ -35,7 +35,10 @@ def parse_and_validate_configs() -> YAMLConfig:
         yaml_config: YAMLConfigDict = yaml.safe_load(yaml_file)
 
     # Create a YAMLConfig object from the dictionary
-    return YAMLConfig(**yaml_config)
+    if yaml_config:
+        return YAMLConfig(**yaml_config)
+    else:
+        return None
 
 
 # Parse and validate the config files at import time
