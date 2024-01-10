@@ -68,10 +68,7 @@ def generate_vscode_settings() -> None:
         file.touch()
         settings = f"""
 {{
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
+    "flake8.args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],
     "python.autoComplete.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
     "python.analysis.extraPaths": [".venv/lib/python{PYTHON_VER}/site-packages"],
     "python.testing.pytestPath": ".venv/bin/pytest"
@@ -192,8 +189,8 @@ def main() -> int:
     # Run pdm init
     add_dependencies_using_pdm()
 
-    # Generate .vscode/settings.json
-    generate_vscode_settings()
+    # # Generate .vscode/settings.json
+    # generate_vscode_settings()
 
     # Remove template setup file
     try:
