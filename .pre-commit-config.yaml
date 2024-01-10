@@ -94,3 +94,14 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      # - id: clear-notebook-outputs
+      #   name: clear-notebook-outputs
+      #   entry: |
+      #     bash -c '
+      #     if git diff --name-only --cached --diff-filter=ACM | grep -q ".ipynb$"; then
+      #       pdm run jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace $(git diff --name-only --cached --diff-filter=ACM | grep ".ipynb$");
+      #     else
+      #       echo "No staged .ipynb files, skipping...";
+      #     fi'
+      #   language: system
+      #   pass_filenames: false
