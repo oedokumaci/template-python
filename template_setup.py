@@ -210,6 +210,11 @@ def main() -> int:
         )
         subprocess.run(["git", "push"], check=True)
 
+    # Do not track config.yaml
+    subprocess.run(
+        ["git", "update-index", "--assume-unchanged", "config/config.yaml"], check=True
+    )
+
     # Remove cached files
     remove_cached_files()
 
