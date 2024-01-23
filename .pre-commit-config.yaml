@@ -5,7 +5,7 @@ repos:
       - id: black
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
+    rev: 7.0.0
     hooks:
       - id: flake8
         args:
@@ -16,7 +16,7 @@ repos:
           - flake8-bugbear
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0 # need 5.12.0 to fix RuntimeError: The Poetry configuration is invalid
+    rev: 5.13.2 # need 5.12.0 to fix RuntimeError: The Poetry configuration is invalid
     hooks:
       - id: isort
         args:
@@ -45,7 +45,7 @@ repos:
         args: [--py310-plus]
   
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.0
+    rev: v1.8.0
     hooks:
       - id: mypy
         args:
@@ -60,7 +60,7 @@ repos:
           - types-PyYAML
 
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.0
+    rev: 1.7.1
     hooks:
       - id: nbqa-black
         # additional_dependencies: [jupytext]  # optional, only if you're using Jupytext
