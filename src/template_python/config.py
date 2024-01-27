@@ -2,16 +2,18 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TypedDict
 
 import yaml
 from pydantic import BaseModel
+from rich import print as rprint
 
 from template_python.path import CONFIG_DIR
 
 
-class YAMLConfig(BaseModel):
-    """Class that defines the structure and validation rules for the config.yaml file.
+class Config(BaseModel):
+    """Class that defines the structure and validation rules for the package config.
 
     Inherits from pydantic BaseModel.
     """
@@ -19,27 +21,41 @@ class YAMLConfig(BaseModel):
     # Define the fields for the config file
 
 
-class YAMLConfigDict(TypedDict):
-    """Type definition for the YAMLConfig dictionary."""
+class ConfigDict(TypedDict):
+    """Type definition for the Config dictionary."""
 
 
-def parse_and_validate_configs() -> YAMLConfig | None:
-    """Parse and validate the contents of the config.yaml file.
+def parse_and_validate_configs(
+    file_path_or_config_dict: Path | ConfigDict = CONFIG_DIR / "config.yaml",
+) -> Config | None:
+    """Parse and validate the contents of the config file or dictionary.
+
+    Args:
+        file_path_or_config_dict (Path | ConfigDict, optional): The path to the config file or a dictionary containing the config. Defaults to CONFIG_DIR / "config.yaml".
 
     Returns:
-        YAMLConfig: The validated YAMLConfig object.
+        Config: The validated Config object.
     """
 
-    with open(CONFIG_DIR / "config.yaml") as yaml_file:
-        # Load the contents of the yaml file into a dictionary
-        yaml_config: YAMLConfigDict = yaml.safe_load(yaml_file)
+    if isinstance(file_path_or_config_dict, Path):
+        # Read the contents of the yaml file into a dictionary
+        with open(file_path_or_config_dict) as yaml_file:
+            config: ConfigDict = yaml.safe_load(yaml_file)
+    elif isinstance(file_path_or_config_dict, dict):
+        config = file_path_or_config_dict
+    else:
+        raise TypeError(
+            f"file_path_or_config_dict must be of type Path or ConfigDict, not {type(file_path_or_config_dict)}"
+        )
 
-    # Create a YAMLConfig object from the dictionary
-    if yaml_config:
-        return YAMLConfig(**yaml_config)
+    # Create a Config object from the dictionary
+    if config:
+        return Config(**config)
     else:
         return None
 
 
-# Parse and validate the config files at import time
-YAML_CONFIG = parse_and_validate_configs()
+if __name__ == "__main__":
+    # Parse and validate the config files at import time
+    CONFIG = parse_and_validate_configs()
+    rprint(CONFIG)
