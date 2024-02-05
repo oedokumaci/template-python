@@ -13,15 +13,21 @@ from template_python.path import LOGS_DIR
 
 
 # Define function to initialize the logger
-def init_logger(log_to_file: bool = True) -> None:
+def init_logger(
+    input_log_file_name: str | None = None, log_to_file: bool = True
+) -> None:
     """Initialize the logger.
 
     Args:
-        file_name (str): The name of the log file.
+        input_log_file_name (str | None): The name of the log file. Defaults to None.
+        log_to_file (bool, optional): Whether to log to file. Defaults to True.
     """
     if log_to_file:
         # Set the log file path and create it if it does not exist
-        log_file_name: str = f"logs_{datetime.now().strftime('%Y-%m-%d')}.log"
+        if input_log_file_name:
+            log_file_name: str = input_log_file_name
+        else:
+            log_file_name = f"logs_{datetime.now().strftime('%Y-%m-%d')}.log"
         log_file: Path = LOGS_DIR / log_file_name
         log_file.touch(exist_ok=True)
 
