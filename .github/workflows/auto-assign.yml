@@ -1,0 +1,24 @@
+name: auto-assign
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  LANG: en_US.utf-8
+  LC_ALL: en_US.utf-8
+  PYTHONIOENCODING: UTF-8
+
+jobs:
+  call-auto-assign-job:
+    uses: oedokumaci/oedokumaci/.github/workflows/auto-assign.yml@main
