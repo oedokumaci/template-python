@@ -3,13 +3,13 @@ from pathlib import Path
 
 import pytest
 
-from template_python.path import CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR, ROOT_DIR
+from template_python.path import CONFIG_DIR, DATA_DIR, LOGS_DIR, OUTPUTS_DIR, ROOT_DIR
 
 
 # Fixture for paths
 @pytest.fixture(
-    params=[ROOT_DIR, CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR],
-    ids=["root_dir", "config_dir", "logs_dir", "outputs_dir"],
+    params=[ROOT_DIR, CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR, DATA_DIR],
+    ids=["root_dir", "config_dir", "logs_dir", "outputs_dir", "data_dir"],
 )
 def path(request: pytest.FixtureRequest) -> Generator[Path, None, None]:
     """A fixture that provides a path for testing.
