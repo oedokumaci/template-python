@@ -5,6 +5,10 @@ on:
     types:
       - opened
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   call-reusable-workflow:
     uses: oedokumaci/oedokumaci/.github/workflows/auto-assign-issue.yml@main
