@@ -7,3 +7,4 @@ ROOT_DIR: Path = Path(__file__).parents[2].resolve().expanduser()
 CONFIG_DIR: Path = ROOT_DIR / "config"
 LOGS_DIR: Path = ROOT_DIR / "logs"
 OUTPUTS_DIR: Path = ROOT_DIR / "outputs"
+DATA_DIR: Path = ROOT_DIR / "data"
