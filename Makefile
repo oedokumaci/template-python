@@ -1,4 +1,4 @@
-.PHONY: help vscode-settings setup update-dev update-user run project-help test pre-commit clean
+.PHONY: help vscode-settings setup update-dev update-user run project-help test pre-commit purge-logs clean
 
 help:  ## Show this help message for each Makefile recipe
 ifeq ($(OS),Windows_NT)
@@ -51,6 +51,18 @@ test:  ## Run tests
 
 pre-commit: clean  ## Run pre-commit
 	pdm run pre-commit run --all-files
+
+purge-logs:  ## Prompt user to purge logs that end with .log
+ifeq ($(OS),Windows_NT)
+	@for /r %%i in (logs\*.log) do @echo %%i
+	@echo "Purge logs? [y/N]"
+	@set /p choice=
+	@if /I "$(choice)"=="y" del /q logs\*.log
+else
+	@find logs -name "*.log" -print
+	@echo "Purge logs? [y/N]"
+	@read -r choice; if [ "$$choice" = "y" ]; then rm -f logs/*.log; fi
+endif
 
 clean:  ## Clean cached files
 ifeq ($(OS),Windows_NT)
