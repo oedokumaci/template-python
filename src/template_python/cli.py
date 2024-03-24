@@ -24,7 +24,6 @@ def main(log_to_file: bool = log_to_file_option) -> None:
     CONFIG = parse_and_validate_configs()
     if CONFIG:
         logging.info("Config:")
-        for key, value in CONFIG.model_dump().items():
-            logging.info(f"{key}: {value}")
+        logging.info(CONFIG.model_dump_json(indent=4))
     else:
         logging.info("Config file is empty.")
