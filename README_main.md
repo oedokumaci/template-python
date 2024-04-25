@@ -56,16 +56,9 @@ There are three easy ways to install the package.
 
 The easiest way to run the project is to use Docker. First, install [Docker](https://docs.docker.com/get-docker/). Then, run the following command in the project directory.
 ```bash
-docker build -t template-python .
+make docker
 ```
-This will build the Docker image. After the image is built, the following are some examples of how to run the project.
-
-```bash
-docker run --rm -it -v "PATH_TO_YOUR_CONFIG.yaml:/usr/src/app/config/config.yaml" -e environment_variable=ENVIRONMENT_VARIABLE template-python
-```
-
-These commands will run the project with the specified config file and cli arguments. The output can be seen in the terminal. The `-v` option mounts the specified config file to the container. The `-e` option sets the environment variable to the specified value. The `--rm` option removes the container after it exits. You can also not use the `--rm` option to keep the container after it exits and see the logs. The `-it` option is for interactive mode.
-
+If you do not have `make` installed, you can run the commands in the `Makefile` manually.
 
 ### Download Zip File
 

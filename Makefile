@@ -1,4 +1,4 @@
-.PHONY: help vscode-settings setup update-dev update-user run project-help test pre-commit purge-logs clean
+.PHONY: help setup update-dev update-user vscode-settings run docker-build docker-run docker docker-logs docker-stop docker-kill docker-show docker-prune project-help test pre-commit purge-logs clean
 
 help:  ## Show this help message for each Makefile recipe
 ifeq ($(OS),Windows_NT)
@@ -42,6 +42,34 @@ endif
 
 run:  ## Run project
 	pdm run python -m template_python
+
+docker-build: ## Build Docker image for the project
+	sudo docker build -t template-python .
+
+docker-run: ## Run Docker container from the image in detached mode
+	sudo docker run --rm -it \
+	-v $(PWD)/data:/usr/src/app/data \
+	-v $(PWD)/logs:/usr/src/app/logs \
+	-v $(PWD)/outputs:/usr/src/app/outputs \
+	--name template-python-app \
+	template-python
+
+docker: clean docker-build docker-run ## Clean, build and run Docker container
+
+docker-logs: ## Show Docker container logs
+	sudo docker logs -f template-python-app
+
+docker-stop: ## Stop Docker container
+	sudo docker stop template-python-app
+
+docker-kill: ## Kill Docker container
+	sudo docker kill template-python-app
+
+docker-show: ## Show Docker containers
+	sudo docker ps -a
+
+docker-prune: ## Prune Docker system
+	sudo docker system prune -a
 
 project-help:  ## Show project help
 	pdm run python -m template_python --help

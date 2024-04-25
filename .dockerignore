@@ -1,2 +1,5 @@
+.github/
+.venv/
+.vscode/
 config/config.yml
 logs/logs.log
