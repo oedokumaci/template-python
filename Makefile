@@ -10,7 +10,6 @@ endif
 setup:  ## Setup project
 	pdm install
 	pdm run pre-commit install
-	make test
 
 update-dev:  ## Update project dependencies for development
 	pdm update
