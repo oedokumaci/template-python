@@ -3,6 +3,7 @@
 import logging
 from collections.abc import Callable
 from datetime import datetime
+from functools import wraps
 from pathlib import Path
 from time import time
 
@@ -71,6 +72,7 @@ def timer_decorator(func: Callable[P, R]) -> Callable[P, R]:
         Callable[P, R]: The decorated function.
     """
 
+    @wraps(func)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         """Wrapper function that prints the time it took to execute a function.
 
