@@ -11,7 +11,7 @@ from template_python.path import CONFIG_DIR, DATA_DIR, LOGS_DIR, OUTPUTS_DIR, RO
     params=[ROOT_DIR, CONFIG_DIR, LOGS_DIR, OUTPUTS_DIR, DATA_DIR],
     ids=["root_dir", "config_dir", "logs_dir", "outputs_dir", "data_dir"],
 )
-def path(request: pytest.FixtureRequest) -> Generator[Path, None, None]:
+def path(request: pytest.FixtureRequest) -> Generator[Path]:
     """A fixture that provides a path for testing.
 
     This fixture takes a request parameter, which is used to parametrize the fixture

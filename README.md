@@ -14,7 +14,7 @@ This is a template Python repository to start a fresh project with a default set
 
 The project setup includes:
 
-- Python >= 3.10
+- Python >= 3.13
 - Ubuntu, MacOS, Windows latest OS versions
 - [PDM](https://pdm.fming.dev/latest/) for dependency management
 - [GitHub Actions](https://github.com/features/actions) and [pre-commit](https://pre-commit.com/) for linting, formatting, CI/CD
@@ -26,9 +26,9 @@ The project setup includes:
 
 # Getting Started
 
-1. Install [Python](https://www.python.org/downloads/) 3.10 in your local machine. For MacOS use
+1. Install [Python](https://www.python.org/downloads/) 3.13 in your local machine. For MacOS use
 ```zsh
-brew install python@3.10
+brew install python@3.13
 ```
 2. Click on the `Use this template` button [at this page](https://github.com/oedokumaci/template-python) to create a new repository from this template (you must be logged in to GitHub to see the button).
 3. Name your repository and click `Create repository from template`. If the repository name is more than one word, make sure to use -hyphens- instead of spaces or underscores.
@@ -49,7 +49,7 @@ python3 template_setup.py [--user-name YOUR_GIT_USER_NAME] [--user-email YOUR_GI
  - Remove `README.md` and rename `README_main.md` to `README.md`
  - If not installed pip install [PDM](https://pdm.fming.dev/latest/) in your local machine
  - Update PDM to the latest version
- - [PDM](https://pdm.fming.dev/latest/) init with Python 3.10
+ - [PDM](https://pdm.fming.dev/latest/) init with Python 3.13
  - Install dependencies with [PDM](https://pdm.fming.dev/latest/)
  - Install [pre-commit](https://pre-commit.com/) hooks to local `.git` folder
  <!-- - Prompt user an option include `.vscode/settings.json` -->
