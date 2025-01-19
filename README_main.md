@@ -45,7 +45,7 @@ template-python
 
 ## Requirements
 
-- Python >= 3.10
+- Python >= 3.13
 - OS: Ubuntu, MacOS, Windows
 
 ## Installation

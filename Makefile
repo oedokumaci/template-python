@@ -33,8 +33,8 @@ ifeq ($(OS),Windows_NT)
 else
 	@echo '{' > .vscode/settings.json
 	@echo '    "flake8.args": ["--max-line-length=88", "--select=C,E,F,W,B", "--extend-ignore=B009,E203,E501,W503"],' >> .vscode/settings.json
-	@echo '    "python.autoComplete.extraPaths": [".venv/lib/python3.10/site-packages"],' >> .vscode/settings.json
-	@echo '    "python.analysis.extraPaths": [".venv/lib/python3.10/site-packages"],' >> .vscode/settings.json
+	@echo '    "python.autoComplete.extraPaths": [".venv/lib/python3.13/site-packages"],' >> .vscode/settings.json
+	@echo '    "python.analysis.extraPaths": [".venv/lib/python3.13/site-packages"],' >> .vscode/settings.json
 	@echo '    "python.testing.pytestPath": ".venv/bin/pytest"' >> .vscode/settings.json
 	@echo '}' >> .vscode/settings.json
 endif

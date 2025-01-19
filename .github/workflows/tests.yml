@@ -22,12 +22,11 @@ jobs:
     strategy:
       matrix:
         os_version:
-        - macos-latest
-        - windows-latest
-        - ubuntu-latest
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
         python_version:
-        - "3.10"
-        - "3.11"
+          - "3.13"
     uses: oedokumaci/oedokumaci/.github/workflows/tests.yml@main
     with:
       os_version: ${{ matrix.os_version }}
